@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+  <title>kollab</title>
+</head>
+<body>
+<script>
+var context = new AudioContext(); // Create audio container
+
+function startOsc(freq){
+  oscillator1 = context.createOscillator(); // Create sound source
+  oscillator2 = context.createOscillator(); // Create sound source
+  oscillator3 = context.createOscillator(); // Create sound source
+  var gainNode2 = context.createGain();
+  var gainNode = context.createGain();
+
+  oscillator1.type = "sine";
+  oscillator1.frequency.value = 100;
+  oscillator1.connect(context.destination); // Connect sound to speakers
+  oscillator1.start(7);
+
+  oscillator2.type = "square";
+  oscillator2.frequency.value = 100;
+  oscillator2.connect(gainNode);
+  gainNode.connect(context.destination);
+  gainNode.gain.value = 0.3;
+  oscillator2.start(3);
+
+  oscillator3.type = "sawtooth";
+  oscillator3.frequency.value = 50;
+  oscillator3.connect(gainNode2);
+  gainNode2.connect(context.destination);
+  gainNode2.gain.value = 0.6;
+  oscillator3.start(0);
+};
+
+function off() {
+  oscillator1.stop(0);
+  oscillator2.stop(0);
+  oscillator3.stop(0);
+
+  oscillator1.disconnect(0);
+  oscillator2.disconnect(0);
+  oscillator3.disconnect(0);
+};
+
+
+</script>
+<script>
+var context2 = new AudioContext(); // Create audio container
+
+function startOsc(freq){
+  oscillator1 = context.createOscillator(); // Create sound source
+  oscillator2 = context.createOscillator(); // Create sound source
+  oscillator3 = context.createOscillator(); // Create sound source
+  var gainNode2 = context.createGain();
+  var gainNode = context.createGain();
+
+  oscillator1.type = "sine";
+  oscillator1.frequency.value = 100;
+  oscillator1.connect(context.destination); // Connect sound to speakers
+  oscillator1.start(7);
+
+  oscillator2.type = "square";
+  oscillator2.frequency.value = 100;
+  oscillator2.connect(gainNode);
+  gainNode.connect(context.destination);
+  gainNode.gain.value = 0.3;
+  oscillator2.start(3);
+
+  oscillator3.type = "sawtooth";
+  oscillator3.frequency.value = 50;
+  oscillator3.connect(gainNode2);
+  gainNode2.connect(context.destination);
+  gainNode2.gain.value = 0.6;
+  oscillator3.start(0);
+};
+
+function stopOsc() {
+  oscillator1.stop(0);
+  oscillator2.stop(0);
+  oscillator3.stop(0);
+
+  oscillator1.disconnect(0);
+  oscillator2.disconnect(0);
+  oscillator3.disconnect(0);
+};
+
+
+</script>
+
+<input type="button" id="play-button" value="Start" />
+<input type="button" id="stop-button" value="Stop"  />
+
+
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+var socket = io();
+$('#play-button').on('click', function() {
+  socket.emit('play');
+  console.log('button');
+});
+
+$('#stop-button').on('click', function() {
+  socket.emit('stop');
+});
+
+socket.on('play', function(){
+  startOsc(82);
+});
+
+socket.on('stop', function() {
+  console.log('stopped');
+  stopOsc();
+});
+
+</script>
+
+</body>
+</html>
