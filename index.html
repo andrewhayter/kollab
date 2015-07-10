@@ -1,121 +1,319 @@
 <!doctype html>
 <html>
-<head>
-  <title>kollab</title>
-</head>
-<body>
-<script>
-var context = new AudioContext(); // Create audio container
+  <head>
+    <title>Socket.IO chat</title>
+    <!-- <link rel="stylesheet" type="text/css" ref="style.css"> -->
+    <style>
+      
+      * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+      }
 
-function startOsc(freq){
-  oscillator1 = context.createOscillator(); // Create sound source
-  oscillator2 = context.createOscillator(); // Create sound source
-  oscillator3 = context.createOscillator(); // Create sound source
-  var gainNode2 = context.createGain();
-  var gainNode = context.createGain();
+      body { 
+        font: 17px Helvetica, Arial; 
+        background-color: #88eadf;
+      }
 
-  oscillator1.type = "sine";
-  oscillator1.frequency.value = 100;
-  oscillator1.connect(context.destination); // Connect sound to speakers
-  oscillator1.start(7);
+      form { 
+        background: #464b51; 
+        padding: 3px; 
+        position: fixed; 
+        border-radius: 10px;
+        bottom: 0; 
+        width: 100%; 
+      }
 
-  oscillator2.type = "square";
-  oscillator2.frequency.value = 100;
-  oscillator2.connect(gainNode);
-  gainNode.connect(context.destination);
-  gainNode.gain.value = 0.3;
-  oscillator2.start(3);
+      form input { 
+        border: 0; 
+        padding: 10px; 
+        width: 90%; 
+        border-radius: 20px;
+        margin-right: .5%; 
+      }
 
-  oscillator3.type = "sawtooth";
-  oscillator3.frequency.value = 50;
-  oscillator3.connect(gainNode2);
-  gainNode2.connect(context.destination);
-  gainNode2.gain.value = 0.6;
-  oscillator3.start(0);
-};
+      form button { 
+        width: 9%; 
+        background: #7c70a0;
+        border-radius: 20px; 
+        padding: 10px; 
+      }
 
-function off() {
-  oscillator1.stop(0);
-  oscillator2.stop(0);
-  oscillator3.stop(0);
+      #messages { 
+        list-style-type: none; 
+        margin: 0; 
+        padding: 0; 
+      }
 
-  oscillator1.disconnect(0);
-  oscillator2.disconnect(0);
-  oscillator3.disconnect(0);
-};
+      #messages li { 
+        padding: 5px 10px; 
+      }
 
+      #messages li:nth-child(odd) { 
+        background: #96ffd3; 
+      }
+      #messages li:nth-child(even) { 
+        background: #f7f4a8; 
+      }
+
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  </head>
+  <body>
+
+
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <button class="kick">kick</button>
+    <script>
+
+    function Instrument(ctx, name, url)
+    {
+      this.ctx = ctx;
+      this.name = name;
+      this.url = url;
+      this.sample = null;
+      this.buffer = null;
+
+      var self = this;
+      this._promise = new Promise(function xhrResolver(resolve, reject)
+      {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", self.url, true);
+        xhr.responseType = "arraybuffer";
+        xhr.onload = function()
+        {
+          resolve(this.response);
+        };
+
+        // TODO: Figure out why this does not fire
+        xhr.addEventListener("error", function()
+        {
+          console.error(arguments, xhr);
+        });
+
+        xhr.send();
+      })
+      .then(function(buffer)
+      {
+        self.buffer = buffer;
+        return new Promise(function audioResolver(resolve, reject)
+        {
+          ctx.decodeAudioData(buffer, resolve, reject);
+        })
+      })
+      .then(function(audioBuffer)
+      {
+        self.sample = audioBuffer;
+        return self;
+      })
+      ;
+    };
+
+    Instrument.prototype.play = function play()
+    {
+      this._promise.then(function()
+      {
+        var source = this.ctx.createBufferSource();
+        source.buffer = this.sample;
+        source.connect(ctx.destination);
+        console.log("Playing %s", this.name)
+        return source.start();
+      }.bind(this));
+    };
+
+    var ctx = new AudioContext();
+    
+
+
+    var instruments = [
+      new Instrument(ctx, "kick", "samples/kicks/apunch_kik.wav"),
+      new Instrument(ctx, "hihat", "samples/hats/at_hats.wav"),
+      new Instrument(ctx, "bleep", "samples/fx/bleep.wav")
+    ]
+
+    Promise.all(instruments.map(function(i) { return i._promise; }))
+    .then(function(kit)
+    {
+      window.kit = kit;
+      console.log(kit);
+    })
+
+    /*
+    
+  
+
+    Promise.all(Object.keys(samples).map(function(key)
+    {
+      var sample = samples[key];
+
+      return new Promise(function(resolve, reject)
+      {
+        
+      });
+    }))
+    .then(function(samples)
+    {
+      //This merges all objects into one
+      return samples.reduce(function(acc, item)
+      {
+        return $.extend(acc, item);
+      });
+    })
+    .then(function(samples)
+    {
+      var obj = {};
+      $.map(samples, function(buffer, name)
+      {
+        ctx.decodeAudioData(buffer, function(sample)
+        {
+          
+          obj[name] = play;
+        });
+      });
+      return obj; 
+    })
+    .then(function allSamplesLoaded(kit)
+    {
+      console.log(kit);
+      window.kit = kit;
+    })
+    .catch(function(ex)
+    {
+      console.error(ex);
+    })
+    ;
+ 
+    */
+
+    // var context = new AudioContext(); // Create audio container
+    // oscillator = context.createOscillator(); // Create bass guitar
+    // gainNode = context.createGain(); // Create boost pedal
+
+    // oscillator.connect(gainNode); // Connect bass guitar to boost pedal
+    // gainNode.connect(context.destination); // Connect boost pedal to amplifier
+    // gainNode.gain.value = 0.3; // Set boost pedal to 30 percent volume
+    // // oscillator.start(); // Play bass guitar instantly
+
+//
+
+    // var context = new AudioContext(); // Create and Initialize the Audio Context
+    // var kick; // Create the Sound 
+    // var getSound = new XMLHttpRequest(); // Load the Sound with XMLHttpRequest
+    // getSound.open("GET", "samples/kicks/apunch_kik.wav", true); // Path to Audio File
+    // getSound.responseType = "arraybuffer"; // Read as Binary Data
+    // getSound.onload = function() {
+    //   context.decodeAudioData(getSound.response, function(buffer){
+    //     kick = buffer; // Decode the Audio Data and Store it in a Variable
+    //   });
+    // }
+
+    // getSound.send(); //send request and load file
+
+    // // window.addEventListener("keydown",playkick); // Create Event Listener for KeyDown
+
+    // var context2 = new AudioContext(); // Create and Initialize the Audio Context
+    // var hat; // Create the Sound 
+    // var getSound2 = new XMLHttpRequest(); // Load the Sound with XMLHttpRequest
+    // getSound2.open("GET", "samples/hats/at_hats.wav", true); // Path to Audio File
+    // getSound2.responseType = "arraybuffer"; // Read as Binary Data
+    // getSound2.onload = function() {
+    //   context2.decodeAudioData(getSound2.response, function(buffer){
+    //     hat = buffer; // Decode the Audio Data and Store it in a Variable
+    //   });
+    // }
+
+    // getSound2.send();
+
+
+    // function playkick(e){
+    //   switch (e) {
+    //     case 1:
+    //       var playSound = context.createBufferSource(); // Declare a New Sound
+    //       playSound.buffer = kick; // Attatch our Audio Data as it's Buffer
+    //       playSound.connect(context.destination);  // Link the Sound to the Output
+    //       playSound.start(0); // Play the Sound Immediately
+    //     break;
+    //     case 2:
+    //       var playSound = context2.createBufferSource(); // Declare a New Sound
+    //       playSound.buffer = hat; // Attatch our Audio Data as it's Buffer
+    //       playSound.connect(context2.destination);  // Link the Sound to the Output
+    //       playSound.start(0); // Play the Sound Immediately
+    //   }
+    // };
 
 </script>
 <script>
-var context2 = new AudioContext(); // Create audio container
-
-function startOsc(freq){
-  oscillator1 = context.createOscillator(); // Create sound source
-  oscillator2 = context.createOscillator(); // Create sound source
-  oscillator3 = context.createOscillator(); // Create sound source
-  var gainNode2 = context.createGain();
-  var gainNode = context.createGain();
-
-  oscillator1.type = "sine";
-  oscillator1.frequency.value = 100;
-  oscillator1.connect(context.destination); // Connect sound to speakers
-  oscillator1.start(7);
-
-  oscillator2.type = "square";
-  oscillator2.frequency.value = 100;
-  oscillator2.connect(gainNode);
-  gainNode.connect(context.destination);
-  gainNode.gain.value = 0.3;
-  oscillator2.start(3);
-
-  oscillator3.type = "sawtooth";
-  oscillator3.frequency.value = 50;
-  oscillator3.connect(gainNode2);
-  gainNode2.connect(context.destination);
-  gainNode2.gain.value = 0.6;
-  oscillator3.start(0);
-};
-
-function stopOsc() {
-  oscillator1.stop(0);
-  oscillator2.stop(0);
-  oscillator3.stop(0);
-
-  oscillator1.disconnect(0);
-  oscillator2.disconnect(0);
-  oscillator3.disconnect(0);
-};
+      var socket = io();
+      $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
 
 
-</script>
+      socket.on('chat message', function(msg){
+        $('#messages').append($('<li>').text(msg).css("border-radius","10px"));
+      });
 
-<input type="button" id="play-button" value="Start" />
-<input type="button" id="stop-button" value="Stop"  />
+
+      $('.sound').click(function(){
+        socket.emit('sound');
+      });
 
 
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script>
-var socket = io();
-$('#play-button').on('click', function() {
-  socket.emit('play');
-  console.log('button');
-});
+      socket.on('sound', function(){
+        oscillator.start();
 
-$('#stop-button').on('click', function() {
-  socket.emit('stop');
-});
+        $('#messages').append($('<li>').text("sent sound").css("border-radius","10px"));
+      });
 
-socket.on('play', function(){
-  startOsc(82);
-});
+//kick button
+      $('.kick').click(function(){
+        socket.emit('kick');
+      });
 
-socket.on('stop', function() {
-  console.log('stopped');
-  stopOsc();
-});
 
-</script>
+      socket.on('kick', function(){
+        playkick();
+        $('#messages').append($('<li>').text("sent kick").css("border-radius","10px"));
+      });
+//kick keydown      
+        
 
-</body>
+      $(document).on('keydown', function(event) {
+         if (event.keyCode == 88) {
+              console.log('x');
+              socket.emit('keypress');
+         }
+
+         if (event.keyCode == 89) {
+              console.log('y');
+              socket.emit('keypress2');
+         }
+
+      });      
+
+
+      socket.on('keypress', function(){
+        playkick(1);
+        $('#messages').append($('<li>').text("sent kick").css("border-radius","10px"));
+      });
+
+      socket.on('keypress2', function(){
+        playkick(2);
+        $('#messages').append($('<li>').text("sent hat").css("border-radius","10px"));
+      });
+
+
+
+    </script>
+
+  </body>
 </html>
