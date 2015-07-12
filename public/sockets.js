@@ -5,6 +5,16 @@ $('form').submit(function(){
   return false;
 });
 
+      // $('.sound').click(function(){
+      //   socket.emit('sound');
+      // });
+
+
+      // socket.on('sound', function(){
+      //   oscillator.start();
+
+      //   $('#messages').append($('<li>').text("sent sound").css("border-radius","10px"));
+      // });
 
 socket.on('chat message', function(msg){
   if (msg != '') {
@@ -34,8 +44,8 @@ socket.on('kick', function(){
   kit[1].play();
   $('#messages').append($('<li>').text("sent kick").css("border-radius","10px"));
 });
-//kick keydown      
-  
+//kick keydown
+
 
 $(document).on('keydown', function(event) {
    if (event.keyCode == 88) {
@@ -48,8 +58,41 @@ $(document).on('keydown', function(event) {
         socket.emit('keypress2');
    }
 
-});      
+});
 
+//shaker button
+      $('.shaker').click(function(){
+        socket.emit('shaker');
+      });
+
+      socket.on('shaker', function(){
+        kit[3].play();
+        $('#messages').append($('<li>').text("sent shaker").css("border-radius","10px"));
+      });
+
+//kick keydown
+
+      // $(document).on('keydown', function(event) {
+      //    if (event.keyCode == 88) {
+      //         console.log('x');
+      //         socket.emit('keypress');
+      //    }
+
+      //    if (event.keyCode == 89) {
+      //         console.log('y');
+      //         socket.emit('keypress2');
+      //    }
+      // });
+
+      // socket.on('keypress', function(){
+      //   kitplay();
+      //   $('#messages').append($('<li>').text("sent kick").css("border-radius","10px"));
+      // });
+
+      // socket.on('keypress2', function(){
+      //   kit[2].play();
+      //   $('#messages').append($('<li>').text("sent hat").css("border-radius","10px"));
+      // });
 
 socket.on('keypress', function(){
   kit[1].play();

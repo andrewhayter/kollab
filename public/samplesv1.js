@@ -1,6 +1,6 @@
     /*
-    
-  
+
+
 
     Promise.all(Object.keys(samples).map(function(key)
     {
@@ -8,7 +8,7 @@
 
       return new Promise(function(resolve, reject)
       {
-        
+
       });
     }))
     .then(function(samples)
@@ -26,11 +26,11 @@
       {
         ctx.decodeAudioData(buffer, function(sample)
         {
-          
+
           obj[name] = play;
         });
       });
-      return obj; 
+      return obj;
     })
     .then(function allSamplesLoaded(kit)
     {
@@ -42,13 +42,13 @@
       console.error(ex);
     })
     ;
- 
+
     */
 
 //
 
     // var context = new AudioContext(); // Create and Initialize the Audio Context
-    // var kick; // Create the Sound 
+    // var kick; // Create the Sound
     // var getSound = new XMLHttpRequest(); // Load the Sound with XMLHttpRequest
     // getSound.open("GET", "samples/kicks/apunch_kik.wav", true); // Path to Audio File
     // getSound.responseType = "arraybuffer"; // Read as Binary Data
@@ -63,7 +63,7 @@
     // // window.addEventListener("keydown",playkick); // Create Event Listener for KeyDown
 
     // var context2 = new AudioContext(); // Create and Initialize the Audio Context
-    // var hat; // Create the Sound 
+    // var hat; // Create the Sound
     // var getSound2 = new XMLHttpRequest(); // Load the Sound with XMLHttpRequest
     // getSound2.open("GET", "samples/hats/at_hats.wav", true); // Path to Audio File
     // getSound2.responseType = "arraybuffer"; // Read as Binary Data

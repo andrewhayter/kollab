@@ -8,6 +8,10 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/seq', function(req, res) {
+  res.sendFile(__dirname + '/sequencer.html');
+});
+
 app.use('/public', express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -17,13 +21,10 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
-});
 
-io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
-});
 
 
 //music
@@ -32,27 +33,33 @@ io.on('connection', function(socket){
     io.emit('sound');
 
   });
-});
 
-io.on('connection', function(socket){
   socket.on('kick', function(){
     io.emit('kick');
-
   });
-});
 
-io.on('connection', function(socket){
+    socket.on('hihat', function(){
+    io.emit('hihat');
+  });
+
+    socket.on('snare', function(){
+    io.emit('snare');
+  });
+
+    socket.on('shaker', function(){
+    io.emit('shaker');
+  });
+
   socket.on('keypress', function(){
     io.emit('keypress');
 
   });
-});
 
-io.on('connection', function(socket){
   socket.on('keypress2', function(){
     io.emit('keypress2');
 
   });
+
 });
 
 http.listen(3000, function(){
