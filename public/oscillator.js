@@ -3,9 +3,8 @@
 (function(){
 
   var audioCtx = new AudioContext();
-  var gainNode = audioCtx.createGain();
-  
-    
+  var gainNode = null;
+  var oscillator = null;
 
   var notesByKeyCode = {
     81: 261.6,
@@ -20,53 +19,50 @@
     80: 659.3
   };
 
-loadKeyboard();
-
-function loadKeyboard(){
 
   var keySound = new Sound();
 
   function Sound(){
-    gainNode = audioCtx.createGain();
     oscillator = audioCtx.createOscillator();
     oscillator.type = 'triangle';
-    oscillator.connect(gainNode); 
-    gainNode.connect(audioCtx.destination);      
     oscillator.start(0);
   };
 
 
-    Sound.prototype.play = function(){
-      oscillator.connect(audioCtx.destination);      
-    };
+  Sound.prototype.play = function(){
+    oscillator.connect(audioCtx.destination); 
+  };
 
-    Sound.prototype.stopNote = function(){
-      oscillator.disconnect();
-    };
+  Sound.prototype.stop = function(){
+    oscillator.disconnect();
+  };
 
-    function startNote(event){
-      var keyCode = event.keyCode;
+  function startNote(event){
+    var keyCode = event.keyCode;
 
-      for (key in notesByKeyCode) {
-        if (notesByKeyCode.hasOwnProperty(key)) {
-          if (key == keyCode){
-            oscillator.frequency.value = notesByKeyCode[key];
-            keySound.play();
-          }
-        }        
-      }
+    for (key in notesByKeyCode) {
+      if (notesByKeyCode.hasOwnProperty(key)) {
+        if (key == keyCode){
+          oscillator.frequency.value = notesByKeyCode[key];
+          // gainNode.connect(audioCtx.destination);
+          // gainNode.gain.value = 3;
+          keySound.play();
+          $('#keyboard [data-value="' + keyCode + '"]').addClass('notepressed');
+        }
+      }        
     }
+  }
 
-    function endNote(){
-      keySound.stopNote();
-      $('#keyboard div').removeClass('notepressed');
-      
-    }
+  function endNote(){
+    keySound.stop();
+    $('#keyboard div').removeClass('notepressed');
+    
+  }
 
-    window.addEventListener('keydown', startNote);
-    window.addEventListener('keyup', endNote);
+  window.addEventListener('keydown', startNote);
+  window.addEventListener('keyup', endNote);
 
-  }; 
+
 
   // document.getElementById('slider').addEventListener('input',function(event){
   //   gainNode.gain.value = event.target.value;
