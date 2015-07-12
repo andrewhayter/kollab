@@ -1,31 +1,27 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Socket.IO chat</title>
-    <link rel="stylesheet" type="text/css" href="public/style.css">
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="public/style.css">
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  </head>
-  <body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+<body>
 
-    <div class="chatboard">
-      <ul id="messages"></ul>
-      <form id="form" action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-      </form>
-    <div>
-
-    <div class="musicboard">
-      <button class="kick">kick</button>
-    </div>
-
-    <script src="samplearray.js"></script>
-    <script src="oscillator.js"></script>
+  <div class="musicboard">
+    <button class="kick">kick</button>
+    <button class="snare">snare</button>
+    <button class="hihat">hihat</button>
+    <button class="shaker">shaker</button>
+    <button class="playRhythm">Play Rhythm</button>
+  </div>
 
 
-    
-    <script src="sockets.js"></script>
+  <div id="messages"></div>
 
-  </body>
+  <script src="samplearray.js"></script>
+  <script src="oscillator.js"></script>
+  <script src="sockets.js"></script>
+</body>
 </html>
