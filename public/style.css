@@ -31,7 +31,8 @@ form button {
   list-style-type: none; 
   margin: 0; 
   padding: 0;
-  width:20%; 
+  width:20%;
+  position:absolute; 
 }
 
 #messages li { 
@@ -61,10 +62,10 @@ form button {
 }
 
 .note.notepressed {
-  width:30px;
-  height:100px;
   background:grey;
-  float:right;
-  border-radius: 4px;
   transition-duration:.5s;
+}
+
+.slider.slider-value {
+  float:right;
 }
