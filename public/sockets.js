@@ -7,7 +7,9 @@ $('form').submit(function(){
 
 
 socket.on('chat message', function(msg){
-  $('#messages').append($('<li>').text(msg).css("border-radius","10px"));
+  if (msg != '') {
+    $('#messages').append($('<li>').text(msg).css("border-radius","10px"));
+  };
 });
 
 

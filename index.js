@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 app.use('/public', express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//messages
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('disconnect', function(){
@@ -25,6 +25,8 @@ io.on('connection', function(socket){
   });
 });
 
+
+//music
 io.on('connection', function(socket){
   socket.on('sound', function(){
     io.emit('sound');
