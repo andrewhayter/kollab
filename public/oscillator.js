@@ -59,9 +59,8 @@
     
   }
 
-  window.addEventListener('keydown', startNote);
-  window.addEventListener('keyup', endNote);
-
+  // window.addEventListener('keydown', startNote);
+  // window.addEventListener('keyup', endNote);
 
 
   // document.getElementById('slider').addEventListener('input',function(event){
@@ -71,4 +70,23 @@
 
 })();
 
+//nexus
 
+nx.onload = function(){
+  nx.colorize("#60B3C8");
+
+  synthkeys.keypattern = ['w','b','w','b','w','w','b','w','b','w'];
+  synthkeys.resize($("#synth").width(), 150);
+  synthkeys.draw();
+  synthkeys.init();
+
+  synthkeys.on('keypress', function(data) {
+    console.log(startNote);
+    startNote;
+    console.log(data);
+  });
+
+  dial1.on('value', function(data) {
+    console.log('d1', data);
+  });
+}

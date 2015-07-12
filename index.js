@@ -28,7 +28,6 @@ io.on('connection', function(socket){
 
 
 //music
-io.on('connection', function(socket){
   socket.on('sound', function(){
     io.emit('sound');
 
@@ -57,10 +56,10 @@ io.on('connection', function(socket){
 
   socket.on('keypress2', function(){
     io.emit('keypress2');
-
   });
 
 });
+
 
 http.listen(3000, function(){
   console.log('listening on *:3000');

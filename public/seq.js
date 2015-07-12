@@ -144,8 +144,8 @@ nx.onload = function(){
     }
   });
 
-  synthkeys.on('*', function(data) {
-    console.log(data);
+  synthkeys.on('*', function() {
+    
   });
 
   dial1.on('value', function(data) {
