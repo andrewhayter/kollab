@@ -1,7 +1,16 @@
 
+*{
+  border:1px dashed black;
+}
+
 body {
   font: 17px Helvetica, Arial;
-  background-color: #88eadf;
+  background-color: #e0fffc;
+}
+
+#msg-board {
+  float:right;
+  padding-right:200px;
 }
 
 form {
@@ -22,10 +31,10 @@ form input {
 }
 
 form button {
-  width: 40%;
+  width: 60px;
   background: #7c70a0;
-  border-radius: 20px;
-  padding: 10px;
+  border-radius: 50%;
+  /*padding: 10px;*/
 }
 
 #messages {
@@ -35,6 +44,7 @@ form button {
   width:20%;
   position:absolute; 
 }
+
 
 #messages li {
   padding: 5px 10px;
@@ -49,24 +59,55 @@ form button {
 }
 
 .musicboard {
-  float:right;
+  float:left;
 }
 
-.note {
-  width:30px;
-  height:100px;
-  margin-right: 2px;
-  background:white;
-  float:right;
-  border-radius: 4px;
-  transition-duration:.5s;
-}
-
-.note.notepressed {
-  background:grey;
-  transition-duration:.5s;
-}
 
 .slider.slider-value {
-  float:right;
+  float:left;
 }
+
+/* keyboard */
+
+select {
+    font-size: 1em;
+    background-color: white;
+}
+
+
+#keyboard {
+    width: 80%;
+    float:left;
+    overflow: hidden;
+}
+
+.key {
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #adadad;
+    border-left: 1px solid #919191;
+    border-top: 1px solid #f2f2f2;
+    border-radius: 2px;
+    color:#00DDCC;
+    background: #fff;
+    margin: 0 0.5%;
+    width: 2.5%;
+    padding: 3.5em 0;
+    text-align: center;
+    float: left;
+    text-transform: uppercase;
+    transition: margin 150ms ease-in-out;
+}
+
+.key:nth-child(even){
+  background: #00DDCC;
+  height:1px;
+  color:white;
+}
+
+.playing {
+  background: #ddd;
+  margin-top: 2em;
+}
+
+
+

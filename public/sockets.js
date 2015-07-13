@@ -1,4 +1,5 @@
 var socket = io();
+
 $('form').submit(function(){
   socket.emit('chat message', $('#m').val());
   $('#m').val('');
@@ -47,18 +48,18 @@ socket.on('kick', function(){
 //kick keydown
 
 
-$(document).on('keydown', function(event) {
-   if (event.keyCode == 88) {
-        console.log('x');
-        socket.emit('keypress');
-   }
+// $(document).on('keydown', function(event) {
+//    if (event.keyCode == 88) {
+//         console.log('x');
+//         socket.emit('keypress');
+//    }
 
-   if (event.keyCode == 89) {
-        console.log('y');
-        socket.emit('keypress2');
-   }
+//    if (event.keyCode == 89) {
+//         console.log('y');
+//         socket.emit('keypress2');
+//    }
 
-});
+// });
 
 //shaker button
       $('.shaker').click(function(){
@@ -94,15 +95,15 @@ $(document).on('keydown', function(event) {
       //   $('#messages').append($('<li>').text("sent hat").css("border-radius","10px"));
       // });
 
-socket.on('keypress', function(){
-  kit[1].play();
-  $('#messages').append($('<li>').text("sent kick").css("border-radius","10px"));
-});
+// socket.on('keypress', function(){
+//   kit[1].play();
+//   $('#messages').append($('<li>').text("sent kick").css("border-radius","10px"));
+// });
 
-socket.on('keypress2', function(){
-  kit[2].play();
-  $('#messages').append($('<li>').text("sent hat").css("border-radius","10px"));
-});
+// socket.on('keypress2', function(){
+//   kit[2].play();
+//   $('#messages').append($('<li>').text("sent hat").css("border-radius","10px"));
+// });
 
 // Oscillator and keyboard
 

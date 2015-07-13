@@ -1,57 +1,62 @@
 <!doctype html>
 <html>
 
-  <head>
-    <title>Kollab</title>
-    <link rel="stylesheet" type="text/css" href="public/style.css">
-
+<head>
+  <title>Kolab</title>
 
   <script src="/socket.io/socket.io.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <script src="nexusUI.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/style.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- // <script src="nexusUI.js"></script> -->
 </head>
 <body>
+ 
+  <!-- // <script src="samplearray.js"></script> -->
+  <!-- // <script src="oscillator.js"></script> -->
+  <!-- // <script src="test.js"></script> -->
 
-  <div class="musicboard">
+
+  <!--   <input id="slider" min="0" max="1" value="0.5" step="0.1" type="range" autocomplete="off"><span class="slider-value">0.5</span> -->
+
+
+    <select name="soundType" id="soundType">
+        <option value="triangle" selected>Triangle</option>
+        <option value="sine">Sine</option>
+        <option value="square">Square</option>
+        <option value="sawtooth">Sawtooth</option>
+    </select>
+  
+
+  <div id="keyboard">
+  </div>
+
+<!--   <div class="musicboard">
     <button class="kick">kick</button>
     <button class="snare">snare</button>
     <button class="hihat">hihat</button>
     <button class="shaker">shaker</button>
     <button class="playRhythm">Play Rhythm</button>
+  </div> -->
+
+  <div id="msg-board">
+    <ul id="messages"></ul>
+    <form action="">
+      <input class="form-control" id="m" autocomplete="off" /><button class="btn">></button>
+    </form>
   </div>
-
-
-    <script src="samplearray.js"></script>
-    <script src="oscillator.js"></script>
-    <!-- // <script src="test.js"></script> -->
-
-    <script src="sockets.js"></script>
-    <input class="slider" min="0" max="1" value="0.5" step="0.1" type="range" autocomplete="off"><span class="slider-value">0.5</span>
-    <canvas nx="keyboard" id="synthkeys"></canvas>
-    <canvas nx="dial"></canvas>
-
-    <div id="keyboard">
-      <div data-value="80"  class='note'>        
-      </div>
-      <div data-value="79"  class='note'>        
-      </div>
-      <div data-value="73"  class='note'>        
-      </div>
-      <div data-value="85"  class='note'>        
-      </div>
-      <div data-value="89"  class='note'>        
-      </div>
-      <div data-value="84"  class='note'>        
-      </div>
-      <div data-value="82"  class='note'>        
-      </div>
-      <div data-value="69"  class='note'>        
-      </div>
-      <div data-value="87" class='note'>        
-      </div>
-      <div data-value="81" class='note'>        
-      </div>
-    </div>
+   
+<script src="oscillator2.js"></script>   
+<script src="sockets.js"></script>
+  
  
 
   </body>
