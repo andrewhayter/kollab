@@ -39,7 +39,7 @@
         }
 
         this.osc.type = type || 'triangle';
-
+        
         /* Start playing the sound. You won't hear it yet as the oscillator node needs to be
         piped to output */
         this.osc.start(0);
