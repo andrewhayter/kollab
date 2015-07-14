@@ -34,6 +34,9 @@
     function Sound(frequency, type) {
            
         this.osc = context.createOscillator();
+        this.osc.connect(this.gainNode);
+        this.gainNode.gain.value = 2;
+        console.log("gain value "+this.gainNode.gain.value);
         
         this.pressed = false; 
 
@@ -51,9 +54,6 @@
     Sound.prototype.play = function() {
         if(!this.pressed) {
             this.pressed = true;
-            this.osc.connect(this.gainNode);
-            this.gainNode.gain.value = 2;
-            console.log("gain value "+this.gainNode.gain.value);
             this.osc.connect(context.destination);
         }
     };
@@ -158,11 +158,6 @@
             console.log(event);
             endNote(event);
         });
-
-
-
-
-
         // window.addEventListener('keydown', playNote);
         // window.addEventListener('keyup', endNote);
     };
