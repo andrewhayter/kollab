@@ -1,8 +1,8 @@
 
-*{
+/**{
   border:1px dashed black;
 }
-
+*/
 body {
   font: 17px Helvetica, Arial;
   background-color: #e0fffc;
@@ -101,8 +101,8 @@ select {
   color:white;
 }
 
-.playing {
-  background: #ddd;
+.key.playing {
+  background: #02ffe9;
   margin-top: 2em;
 }
 

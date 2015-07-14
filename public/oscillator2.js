@@ -2,6 +2,9 @@
 
 (function() {
     var context = new (AudioContext || webkitAudioContext)();
+    var gainNode = context.createGain(); 
+    // osc.connect(gainNode);
+    // gainNode.connect(context.destination);
 
     var keyboardNotes = {
         65: { noteName: 'a', frequency: 261.6 },
@@ -32,6 +35,8 @@
 
     function Sound(frequency, type) {
         this.osc = context.createOscillator();
+        
+        gainNode.gain.value = 2;
         this.pressed = false; 
 
         if(typeof frequency !== 'undefined') {
@@ -41,18 +46,21 @@
         this.osc.type = type || 'triangle';
         
         this.osc.start(0);
+        this.osc.connect(gainNode);
     };
 
     Sound.prototype.play = function() {
         if(!this.pressed) {
             this.pressed = true;
-            this.osc.connect(context.destination);
+            // gainNode.gain.value = 2;
+            gainNode.connect(context.destination);
+
         }
     };
 
     Sound.prototype.stop = function() {
         this.pressed = false;
-        this.osc.disconnect();
+        gainNode.disconnect();
     };
 
     function keyboard(notes, containerId) {
@@ -140,10 +148,10 @@
 
         
         socket.on('end note', function(event){
-            console.log("should end note");
-            console.log("end note " + event);
-            console.log(endNote(event));
-            console.log(event);
+            // console.log("should end note");
+            // console.log("end note " + event);
+            // console.log(endNote(event));
+            // console.log(event);
             endNote(event);
         });
 
