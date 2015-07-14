@@ -48,7 +48,6 @@ form button {
 
 #messages li {
   padding: 5px 10px;
-
 }
 
 #messages li:nth-child(odd) {
@@ -56,6 +55,7 @@ form button {
 }
 #messages li:nth-child(even) {
   background: #f7f4a8;
+
 }
 
 .musicboard {
@@ -82,20 +82,17 @@ select {
 }
 
 .key {
-    border-right: 2px solid #ccc;
-    border-bottom: 2px solid #adadad;
-    border-left: 1px solid #919191;
-    border-top: 1px solid #f2f2f2;
-    border-radius: 2px;
-    color:#00DDCC;
-    background: #fff;
-    margin: 0 0.5%;
-    width: 2.5%;
-    padding: 3.5em 0;
-    text-align: center;
-    float: left;
-    text-transform: uppercase;
-    transition: margin 150ms ease-in-out;
+
+  border-radius: 2px;
+  color:#00DDCC;
+  background: #fff;
+  margin: 0 0.5%;
+  width: 2.5%;
+  padding: 3.5em 0;
+  text-align: center;
+  float: left;
+  text-transform: uppercase;
+  transition: margin 150ms ease-in-out;
 }
 
 .key:nth-child(even){

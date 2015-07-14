@@ -2,6 +2,7 @@
 
 (function() {
     var context = new (AudioContext || webkitAudioContext)();
+    var gainNode = context.createGain(); 
 
     var keyboardNotes = {
         65: { noteName: 'a', frequency: 261.6 },
@@ -31,7 +32,9 @@
     };
 
     function Sound(frequency, type) {
+           
         this.osc = context.createOscillator();
+        
         this.pressed = false; 
 
         if(typeof frequency !== 'undefined') {
@@ -48,6 +51,9 @@
     Sound.prototype.play = function() {
         if(!this.pressed) {
             this.pressed = true;
+            this.osc.connect(this.gainNode);
+            this.gainNode.gain.value = 2;
+            console.log("gain value "+this.gainNode.gain.value);
             this.osc.connect(context.destination);
         }
     };
