@@ -36,7 +36,7 @@
     function Sound(frequency, type) {
         this.osc = context.createOscillator();
         
-        gainNode.gain.value = 2;
+        gainNode.gain.value = 0.5;
         this.pressed = false; 
 
         if(typeof frequency !== 'undefined') {
