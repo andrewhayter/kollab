@@ -26,9 +26,7 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
 
-
 //music
-io.on('connection', function(socket){
   socket.on('sound', function(){
     io.emit('sound');
 
