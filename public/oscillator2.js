@@ -153,12 +153,6 @@
             endNote(event);
         });
 
-
-
-
-
-        // window.addEventListener('keydown', playNote);
-        // window.addEventListener('keyup', endNote);
     };
 
     window.addEventListener('load', function() {
