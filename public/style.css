@@ -67,6 +67,17 @@ form button {
   float:left;
 }
 
+#gain-slider {
+  width:20%;
+}
+
+#bq-frequency-slider {
+  width:20%;
+}
+#bq-gain-slider {
+  width:20%;
+}
+
 /* keyboard */
 
 select {
@@ -79,6 +90,25 @@ select {
     width: 80%;
     float:left;
     overflow: hidden;
+}
+
+#keyboard2 {
+    width: 80%;
+    background-color: red;
+    /*overflow: hidden;*/
+}
+
+.note {
+  background-color: red;
+  padding-right:10px;
+  width:60%;
+  height:100%;
+}
+
+.notepressed {
+  background-color: blue;
+    width:60%;
+  height:100%;
 }
 
 .key {
