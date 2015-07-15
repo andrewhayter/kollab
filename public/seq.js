@@ -46,6 +46,8 @@ function soundsLoaded()
   amp.val.value = 0.7;
   amp.init();
 
+
+
   function play(buffer)
   {
     var source = audioContext.createBufferSource();
@@ -63,6 +65,7 @@ function soundsLoaded()
     masterVolume.connect(audioContext.destination);
     compressor.connect(audioContext.destination);
     source.start(); // start step seq
+    volumeMeter.setup(audioContext,masterVolume);
   }
 
   pattern.on('*', function(data)
@@ -84,7 +87,7 @@ function soundsLoaded()
   }
 });
 
-  toggle1.on('*', function(data)
+  onOff.on('*', function(data)
   {
     if (data.value == 1) {
       pattern.sequence(bpmTempo);
