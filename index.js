@@ -31,7 +31,7 @@ io.on('connection', function(socket){
     io.emit('play note', event);
     console.log("server playNote"+ event);
     console.log(event);
-
+  });
 //music
   socket.on('sound', function(){
     io.emit('sound');

@@ -2,10 +2,13 @@
 
 (function() {
     
+   
     var context = new (AudioContext || webkitAudioContext)();
     var gainNode = context.createGain();
-    // osc.connect(gainNode);
-    gainNode.connect(context.destination);
+    var biquadFilter = context.createBiquadFilter();
+
+
+    biquadFilter.connect(context.destination);
 
     var keyboardNotes = {
         65: { noteName: 'a', frequency: 261.6 },
@@ -36,8 +39,15 @@
 
     function Sound(frequency, type) {
         this.osc = context.createOscillator();
+        // this.osc2 = context.createOscillator();
         // this.osc.connect(gainNode);
-        gainNode.gain.value = 1;
+        // gainNode.gain.value = 1;
+        // console.log("gain node value " +gainNodeValue);
+        // biquadFilter.type = "highpass";
+        // biquadFilter.frequency.value = 250;
+        // biquadFilter.gain.value = 25;
+        // biquadFilter.detune.value = 100;
+
         this.pressed = false; 
 
         if(typeof frequency !== 'undefined') {
@@ -45,7 +55,6 @@
         }
 
         this.osc.type = type || 'triangle';
-        
         this.osc.start(0);
         
     };
@@ -53,7 +62,13 @@
     Sound.prototype.play = function() {
         if(!this.pressed) {
             this.pressed = true;
+            gainNode.gain.value = $('#gain-slider').val();
+            biquadFilter.type = $('#bqType').val();
+            biquadFilter.frequency.value = $('#bq-frequency-slider').val();
+            biquadFilter.gain.value = $('#bq-gain-slider').val();
+            biquadFilter.detune.value = $('#bq-detune-slider').val();
             this.osc.connect(gainNode);
+            gainNode.connect(biquadFilter);
             // gainNode.connect(context.destination);
 
         }
@@ -62,6 +77,7 @@
     Sound.prototype.stop = function() {
         this.pressed = false;
         // gainNode.disconnect();
+        // this.osc2.disconnect();
         this.osc.disconnect();
     };
 
@@ -120,16 +136,11 @@
 
         waveFormSelector.addEventListener('change', setWaveform);
 
-        
-        window.addEventListener('keydown', function(event){
-            
-               if (!$('#m').is(':focus')) {
-                    socket.emit('play note', event.keyCode);    
-               };
-                
-            
-            console.log(event.keyCode);
-            console.log("keydown " + event.keyCode);
+
+        window.addEventListener('keydown', function(event){            
+            if (!$('#m').is(':focus')) {
+                socket.emit('play note', event.keyCode);    
+            }; 
         });
 
         

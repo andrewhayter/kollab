@@ -43,11 +43,11 @@
     for (key in notesByKeyCode) {
       if (notesByKeyCode.hasOwnProperty(key)) {
         if (key == keyCode){
-          oscillator.frequency.value = notesByKeyCode[key];
+          // oscillator.frequency.value = notesByKeyCode[key];
           // gainNode.connect(audioCtx.destination);
           // gainNode.gain.value = 3;
           keySound.play();
-          $('#keyboard [data-value="' + keyCode + '"]').addClass('notepressed');
+          $('#keyboard2 [data-value="' + keyCode + '"]').addClass('notepressed');
         }
       }        
     }
@@ -55,7 +55,7 @@
 
   function endNote(){
     keySound.stop();
-    $('#keyboard div').removeClass('notepressed');
+    $('#keyboard2 div').removeClass('notepressed');
     
   }
 
