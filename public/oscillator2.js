@@ -6,8 +6,7 @@
     var context = new (AudioContext || webkitAudioContext)();
     var gainNode = context.createGain();
     var biquadFilter = context.createBiquadFilter();
-    var gainNodeValue = 0;
-    var gainBqfrequency = 0;
+
 
     biquadFilter.connect(context.destination);
 
@@ -63,12 +62,11 @@
     Sound.prototype.play = function() {
         if(!this.pressed) {
             this.pressed = true;
-            // this.osc.connect(biquadFilter);
-            biquadFilter.type = "highpass";
+            gainNode.gain.value = $('#gain-slider').val();
+            biquadFilter.type = $('#bqType').val();
             biquadFilter.frequency.value = $('#bq-frequency-slider').val();
             biquadFilter.gain.value = $('#bq-gain-slider').val();
-            biquadFilter.detune.value = 250;
-            gainNode.gain.value = $('#gain-slider').val();
+            biquadFilter.detune.value = $('#bq-detune-slider').val();
             this.osc.connect(gainNode);
             gainNode.connect(biquadFilter);
             // gainNode.connect(context.destination);
@@ -139,15 +137,10 @@
         waveFormSelector.addEventListener('change', setWaveform);
 
 
-        window.addEventListener('keydown', function(event){
-            
-               if (!$('#m').is(':focus')) {
-                    socket.emit('play note', event.keyCode);    
-               };
-                
-            
-            console.log(event.keyCode);
-            console.log("keydown " + event.keyCode);
+        window.addEventListener('keydown', function(event){            
+            if (!$('#m').is(':focus')) {
+                socket.emit('play note', event.keyCode);    
+            }; 
         });
 
         
