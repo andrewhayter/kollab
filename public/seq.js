@@ -1,16 +1,13 @@
 /* jshint quotmark: false, browser: true, jquery: true, devel: true */
-/* globals nx, pattern, synthkeys, toggle1, dial1 */
+/* globals nx, pattern, toggle1, amp */
 "use strict";
 var Context = window.AudioContext || window.webkitAudioContext;
 var audioContext = new Context();
 
-var bpmTempo = 120;
+var ampValue = 0.7;
 
-// store sounds for decoded sound buffers
-
+var bpmTempo = 240;
 var sounds = {};
-
-// load found file and decode data
 
 function loadSound(name, done)
 {
@@ -42,19 +39,29 @@ function soundsLoaded()
   pattern.col = 16;
   pattern.row = Object.keys(sounds).length;
   pattern.resize($("#content").width(), 250);
-  pattern.draw();
   pattern.init();
+  pattern.draw();
+  pattern.jumpToCol(-1);
 
-  synthkeys.keypattern = ['w','b','w','b','w','w','b','w','b','w','b','w'];
-  synthkeys.resize($("#synth").width(), 250);
-  synthkeys.draw();
-  synthkeys.init();
+  amp.val.value = 0.7;
+  amp.init();
 
   function play(buffer)
   {
     var source = audioContext.createBufferSource();
+    var masterVolume = audioContext.createGain();
+    var compressor = audioContext.createDynamicsCompressor();
+    compressor.threshold.value = -50;
+    compressor.knee.value = 40;
+    compressor.ratio.value = 12;
+    compressor.reduction.value = -20;
+    compressor.attack.value = 0;
+    compressor.release.value = 0.25;
     source.buffer = buffer;
-    source.connect(audioContext.destination);
+    source.connect(masterVolume);
+    masterVolume.gain.value = ampValue;
+    masterVolume.connect(audioContext.destination);
+    compressor.connect(audioContext.destination);
     source.start(); // start step seq
   }
 
@@ -63,19 +70,19 @@ function soundsLoaded()
     var soundNames = Object.keys(sounds);
     if(data.list)
     {
-      //Sequencer event
-      data.list.map(function(state, idx)
-      {
-        if(!state) { return; }
-        var sound = sounds[soundNames[idx]];
-        play(sound);
-      });
-    }
-    else
+    //Sequencer event
+    data.list.map(function(state, idx)
     {
-      //Click event
-    }
-  });
+      if(!state) { return; }
+      var sound = sounds[soundNames[idx]];
+      play(sound);
+    });
+  }
+  else
+  {
+    //Click event
+  }
+});
 
   toggle1.on('*', function(data)
   {
@@ -86,10 +93,9 @@ function soundsLoaded()
     }
   });
 
-  dial1.on('value', function(data)
-  {
-    console.log('d1', data);
-  });
+  amp.on('value', function(data) {
+    ampValue = data;
+  });5
 }
 
 function loadNextSound()
@@ -108,4 +114,3 @@ nx.onload = function()
 {
   loadNextSound();
 };
-
