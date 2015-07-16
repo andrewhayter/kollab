@@ -8,7 +8,7 @@
     var context = new (AudioContext || webkitAudioContext)();
     var gainNode = context.createGain();
     var biquadFilter = context.createBiquadFilter();
-
+    // gainNode.gain.linearRampToValueAtTime(1.0, context.currentTime + 2); //'gain' is the AudioParam
     gainNode.connect(biquadFilter);
     biquadFilter.connect(context.destination);
 
@@ -63,6 +63,10 @@
 
     function Sound(frequency, type) {
         this.osc = context.createOscillator();
+        this.gain = context.createGain();
+        this.gain.gain.value = 0;
+        this.osc.connect(this.gain);
+        this.gain.connect(gainNode);
         this.pressed = false; 
 
         if(typeof frequency !== 'undefined') {
@@ -76,23 +80,18 @@
 
 
     Sound.prototype.play = function() {
-        if(!this.pressed)
-        {
+        console.log(this);
+        if(!this.pressed) {
             this.pressed = true;
-                //Set the gain to 0
-            
-            // gainNode.gain.linearRampToValueAtTime(1.0, context.currentTime + 1); //'gain' is the 
-            this.osc.connect(gainNode);
-            //Fade in
+            // this.gain.gain.value = 1;
+            this.gain.gain.linearRampToValueAtTime(1, context.currentTime + 0.1);
         }
     };
 
     Sound.prototype.stop = function() {
-        this.pressed = false
-        // gainNode.disconnect();
-        // this.osc2.disconnect();
-        //fade out to 0
-        this.osc.disconnect();
+        this.pressed = false;
+        // this.gain.gain.value = 0;
+        this.gain.gain.linearRampToValueAtTime(0, context.currentTime + 0.1);
     };
 
     function keyboard(notes, containerId) {
