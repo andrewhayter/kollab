@@ -19,6 +19,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 io.on('connection', function(socket){
   console.log('a user connected');
 
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
 
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
@@ -35,56 +38,13 @@ io.on('connection', function(socket){
 //music
   socket.on('sound', function(){
     io.emit('sound');
-
   });
-
   socket.on('end note', function(event){
     io.emit('end note', event);
     console.log("server endNote"+ event);
     console.log(event);
   });
-
-   socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-
-
-
-
-//music
-//   socket.on('sound', function(){
-//     io.emit('sound');
-
-//   });
-
-//   socket.on('kick', function(){
-//     io.emit('kick');
-//   });
-
-//     socket.on('hihat', function(){
-//     io.emit('hihat');
-//   });
-
-//     socket.on('snare', function(){
-//     io.emit('snare');
-//   });
-
-//     socket.on('shaker', function(){
-//     io.emit('shaker');
-//   });
-
-//   socket.on('keypress', function(){
-//     io.emit('keypress');
-
-//   });
-
-//   socket.on('keypress2', function(){
-//     io.emit('keypress2');
-//   });
-
-  });
 });
-
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
