@@ -4,7 +4,26 @@
 var Context = window.AudioContext || window.webkitAudioContext;
 var audioContext = new Context();
 
-var ampValue = 0.7;
+var masterVolume = audioContext.createGain();
+var compressor = audioContext.createDynamicsCompressor();
+
+var kickGain = audioContext.createGain();
+var snareGain = audioContext.createGain();
+var hihatGain = audioContext.createGain();
+
+compressor.threshold.value = -50;
+compressor.knee.value = 40;
+compressor.ratio.value = 12;
+compressor.reduction.value = -20;
+compressor.attack.value = 0;
+compressor.release.value = 0.25;
+
+kickGain.connect(masterVolume);
+snareGain.connect(masterVolume);
+hihatGain.connect(masterVolume);
+
+masterVolume.connect(compressor);
+compressor.connect(audioContext.destination);
 
 var bpmTempo = 240;
 var sounds = {};
@@ -35,37 +54,58 @@ function soundsLoaded()
 {
   nx.sendsTo("js");
   nx.colorize("#60B3C8");
+  nx.showLabels = true;
 
   pattern.col = 16;
   pattern.row = Object.keys(sounds).length;
   pattern.resize($("#content").width(), 250);
   pattern.init();
-  pattern.draw();
   pattern.jumpToCol(-1);
 
-  amp.val.value = 0.7;
+  amp.val.value = 0.8;
   amp.init();
+  amp.on('value', function(gain)
+  {
+    masterVolume.gain.value = gain;
+  });
 
+  kickPitch.val.value = 0.5;
+  kickPitch.init();
+  snarePitch.val.value = 0.5;
+  snarePitch.init();
+  hihatPitch.val.value = 0.5;
+  hihatPitch.init();
 
+  kickVol.val.value = 0.8;
+  kickVol.init();
+  kickVol.on('value', function(gain)
+  {
+    kickGain.gain.value = gain;
+  });
 
-  function play(buffer)
+  snareVol.val.value = 0.8;
+  snareVol.init();
+  snareVol.on('value', function(gain)
+  {
+    snareGain.gain.value = gain;
+  });
+
+  hihatVol.val.value = 0.8;
+  hihatVol.init();
+  hihatVol.on('value', function(gain)
+  {
+    hihatGain.gain.value = gain;
+  });
+
+  volumeMeter.setup(audioContext, masterVolume);
+
+  function play(buffer, kind)
   {
     var source = audioContext.createBufferSource();
-    var masterVolume = audioContext.createGain();
-    var compressor = audioContext.createDynamicsCompressor();
-    compressor.threshold.value = -50;
-    compressor.knee.value = 40;
-    compressor.ratio.value = 12;
-    compressor.reduction.value = -20;
-    compressor.attack.value = 0;
-    compressor.release.value = 0.25;
     source.buffer = buffer;
-    source.connect(masterVolume);
-    masterVolume.gain.value = ampValue;
-    masterVolume.connect(audioContext.destination);
-    compressor.connect(audioContext.destination);
-    source.start(); // start step seq
-    volumeMeter.setup(audioContext,masterVolume);
+    source.playbackRate.value = 0.5 + window[kind + "Pitch"].val.value;
+    source.connect(window[kind + "Gain"]);
+    source.start();
   }
 
   pattern.on('*', function(data)
@@ -78,7 +118,7 @@ function soundsLoaded()
     {
       if(!state) { return; }
       var sound = sounds[soundNames[idx]];
-      play(sound);
+      play(sound, soundNames[idx]);
     });
   }
   else
@@ -95,10 +135,6 @@ function soundsLoaded()
       pattern.stop();
     }
   });
-
-  amp.on('value', function(data) {
-    ampValue = data;
-  });5
 }
 
 function loadNextSound()

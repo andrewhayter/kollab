@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //messages
 io.on('connection', function(socket){
   console.log('a user connected');
+
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
@@ -55,9 +56,6 @@ io.on('connection', function(socket){
 
   socket.on('keypress2', function(){
     io.emit('keypress2');
-
-  });
-
   });
 });
 
