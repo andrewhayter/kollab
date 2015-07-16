@@ -82,7 +82,6 @@ io.on('connection', function(socket){
 //     io.emit('keypress2');
 //   });
 
-  });
 });
 
 
