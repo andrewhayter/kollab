@@ -2,13 +2,35 @@
 
 (function() {
     
+
+    //fixing
    
     var context = new (AudioContext || webkitAudioContext)();
     var gainNode = context.createGain();
     var biquadFilter = context.createBiquadFilter();
 
-
+    gainNode.connect(biquadFilter);
     biquadFilter.connect(context.destination);
+
+    // $('#gain-slider').on('change', function(e) {
+    //     gainNode.gain.value = this.value;
+    // });
+
+    function wireUpOnChange(id, node, prop, noValue) {
+        $(id).on('change', function() {
+            if(noValue) {
+                node[prop] = this.value;
+            } else {
+                node[prop].value = this.value;
+            };
+        })
+    };
+
+    wireUpOnChange('#gain-slider', gainNode, 'gain');    
+    wireUpOnChange('#bqType', biquadFilter, 'type', true);
+    wireUpOnChange('#bq-frequency-slider', biquadFilter, 'frequency');
+    wireUpOnChange('#bq-gain-slider', biquadFilter, 'gain');
+    wireUpOnChange('#bq-detune-slider', biquadFilter, 'detune');
 
     var keyboardNotes = {
         65: { noteName: 'a', frequency: 261.6 },
@@ -37,17 +59,10 @@
         };
     };
 
+
+
     function Sound(frequency, type) {
         this.osc = context.createOscillator();
-        // this.osc2 = context.createOscillator();
-        // this.osc.connect(gainNode);
-        // gainNode.gain.value = 1;
-        // console.log("gain node value " +gainNodeValue);
-        // biquadFilter.type = "highpass";
-        // biquadFilter.frequency.value = 250;
-        // biquadFilter.gain.value = 25;
-        // biquadFilter.detune.value = 100;
-
         this.pressed = false; 
 
         if(typeof frequency !== 'undefined') {
@@ -59,25 +74,24 @@
         
     };
 
-    Sound.prototype.play = function() {
-        if(!this.pressed) {
-            this.pressed = true;
-            gainNode.gain.value = $('#gain-slider').val();
-            biquadFilter.type = $('#bqType').val();
-            biquadFilter.frequency.value = $('#bq-frequency-slider').val();
-            biquadFilter.gain.value = $('#bq-gain-slider').val();
-            biquadFilter.detune.value = $('#bq-detune-slider').val();
-            this.osc.connect(gainNode);
-            gainNode.connect(biquadFilter);
-            // gainNode.connect(context.destination);
 
+    Sound.prototype.play = function() {
+        if(!this.pressed)
+        {
+            this.pressed = true;
+                //Set the gain to 0
+            
+            // gainNode.gain.linearRampToValueAtTime(1.0, context.currentTime + 1); //'gain' is the 
+            this.osc.connect(gainNode);
+            //Fade in
         }
     };
 
     Sound.prototype.stop = function() {
-        this.pressed = false;
+        this.pressed = false
         // gainNode.disconnect();
         // this.osc2.disconnect();
+        //fade out to 0
         this.osc.disconnect();
     };
 
