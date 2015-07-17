@@ -1,88 +1,71 @@
 <!doctype html>
 <html>
-
 <head>
   <title>Kolab</title>
-
   <script src="/socket.io/socket.io.js"></script>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <link rel="stylesheet" type="text/css" href="public/style.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <!-- // <script src="nexusUI.js"></script> -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
- 
-  <!-- // <script src="samplearray.js"></script> -->
-  
-  <!-- // <script src="test.js"></script> -->
-    <select name="soundType" id="soundType">
-        <option value="triangle" selected>Triangle</option>
-        <option value="sine">Sine</option>
-        <option value="square">Square</option>
-        <option value="sawtooth">Sawtooth</option>
-    </select>
+  <div id="content">
+    <canvas nx="matrix" id="pattern"></canvas>
+  </div>
 
-    <label>Volume</label>
-    <input class="form-control" id="gain-slider" min="0" max="5" value="2.5" step="0.1" type="range" autocomplete="off" >
-    <label>BiquadFilter</label><br >
+  <div id="controls">
+    <canvas nx="toggle" id="onOff"></canvas>
+    <canvas nx="dial" id="amp"></canvas>
+    <canvas nx="meter" id="volumeMeter"></canvas>
+    <canvas nx="dial" id="kickPitch"></canvas>
+    <canvas nx="dial" id="snarePitch"></canvas>
+    <canvas nx="dial" id="hihatPitch"></canvas>
+    <canvas nx="dial" id="kickVol"></canvas>
+    <canvas nx="dial" id="snareVol"></canvas>
+    <canvas nx="dial" id="hihatVol"></canvas>
+  </div>
 
-    <select name="bqType" id="bqType">
-      <option value="lowpass" selected>Lowpass</option>
-      <option value="highpass">Highpass</option>
-      <option value="bandpass">Bandpass</option>
-      <option value="lowshelf">Lowshelf</option>
-      <option value="highshelf">Highshelf</option>
-      <option value="peaking">Peaking</option>
-      <option value="notch">Notch</option>
-      <option value="allpass">Allpass</option>
-    </select><br >
+  <select name="soundType" id="soundType">
+    <option value="triangle" selected>Triangle</option>
+    <option value="sine">Sine</option>
+    <option value="square">Square</option>
+    <option value="sawtooth">Sawtooth</option>
+  </select>
 
-    <span>Frequency</span>
-    <input class="form-control" id="bq-frequency-slider" min="0" max="750" value="375" step="10" type="range" autocomplete="off" >
-    <span>Gain</span>
-    <input class="form-control" id="bq-gain-slider" min="0" max="50" value="25" step="5" type="range" autocomplete="off" >
-    <span>Detune</span>
-    <input class="form-control" id="bq-detune-slider" min="0" max="500" value="250" step="10" type="range" autocomplete="off" >
+  <label>Volume</label>
+  <input class="form-control" id="gain-slider" min="0" max="5" value="2.5" step="0.1" type="range" autocomplete="off" >
+  <label>BiquadFilter</label><br >
 
-   
-    <!-- <label for=fader>Volume</label>
-    <input type=range min=0 max=100 value=50 id=fader step=1 oninput='outputUpdate(value)'>
-    <output for=fader id='volume'>50</output> -->
+  <select name="bqType" id="bqType">
+    <option value="lowpass" selected>Lowpass</option>
+    <option value="highpass">Highpass</option>
+    <option value="bandpass">Bandpass</option>
+    <option value="lowshelf">Lowshelf</option>
+    <option value="highshelf">Highshelf</option>
+    <option value="peaking">Peaking</option>
+    <option value="notch">Notch</option>
+    <option value="allpass">Allpass</option>
+  </select><br >
 
-
-
-   
-  
+  <span>Frequency</span>
+  <input class="form-control" id="bq-frequency-slider" min="0" max="750" value="375" step="10" type="range" autocomplete="off" >
+  <span>Gain</span>
+  <input class="form-control" id="bq-gain-slider" min="0" max="50" value="25" step="5" type="range" autocomplete="off" >
+  <span>Detune</span>
+  <input class="form-control" id="bq-detune-slider" min="0" max="500" value="250" step="10" type="range" autocomplete="off" >
 
   <div id="keyboard">
   </div>
-
-<!--   <div class="musicboard">
-    <button class="kick">kick</button>
-    <button class="snare">snare</button>
-    <button class="hihat">hihat</button>
-    <button class="shaker">shaker</button>
-    <button class="playRhythm">Play Rhythm</button>
-  </div> -->
-
 <!--   <div id="msg-board">
     <ul id="messages"></ul>
     <form action="">
       <input class="form-control" id="m" autocomplete="off" /><button class="btn">></button>
     </form>
   </div> -->
-<script src="oscillator2.js"></script> 
-<!-- <script src="oscillator.js"></script>   -->
-<script src="sockets.js"></script>
-  
- 
-
-  </body>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="nexusUI.js"></script>
+  <script src="oscillator2.js"></script>
+  <script src="sequencer.js"></script>
+  <script src="sockets.js"></script>
+</body>
 </html>

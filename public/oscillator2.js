@@ -1,10 +1,8 @@
-
-
 (function() {
-    
+
 
     //fixing
-   
+
     var context = new (AudioContext || webkitAudioContext)();
     var gainNode = context.createGain();
     var biquadFilter = context.createBiquadFilter();
@@ -26,7 +24,7 @@
         })
     };
 
-    wireUpOnChange('#gain-slider', gainNode, 'gain');    
+    wireUpOnChange('#gain-slider', gainNode, 'gain');
     wireUpOnChange('#bqType', biquadFilter, 'type', true);
     wireUpOnChange('#bq-frequency-slider', biquadFilter, 'frequency');
     wireUpOnChange('#bq-gain-slider', biquadFilter, 'gain');
@@ -67,7 +65,7 @@
         this.gain.gain.value = 0;
         this.osc.connect(this.gain);
         this.gain.connect(gainNode);
-        this.pressed = false; 
+        this.pressed = false;
 
         if(typeof frequency !== 'undefined') {
             this.osc.frequency.value = frequency;
@@ -75,7 +73,7 @@
 
         this.osc.type = type || 'triangle';
         this.osc.start(0);
-        
+
     };
 
 
@@ -95,7 +93,7 @@
     };
 
     function keyboard(notes, containerId) {
-        var sortedKeys = []; 
+        var sortedKeys = [];
         var waveFormSelector = document.getElementById('soundType');
 
         for(var keyCode in notes) {
@@ -150,18 +148,18 @@
         waveFormSelector.addEventListener('change', setWaveform);
 
 
-        window.addEventListener('keydown', function(event){            
+        window.addEventListener('keydown', function(event){
             if (!$('#m').is(':focus')) {
-                socket.emit('play note', event.keyCode);    
-            }; 
+                socket.emit('play note', event.keyCode);
+            };
         });
 
-        
+
         socket.on('play note', function(event){
             console.log("should play note");
             console.log("play note " + event);
             console.log(event);
-            playNote(event);                      
+            playNote(event);
         });
 
 
@@ -172,7 +170,7 @@
             console.log("keydown " + event.keyCode);
         });
 
-        
+
         socket.on('end note', function(event){
             // console.log("should end note");
             // console.log("end note " + event);
