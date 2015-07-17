@@ -52,14 +52,8 @@ var soundNames = [
 
 function soundsLoaded()
 {
-<<<<<<< Updated upstream:public/seq.js
-  nx.sendsTo("js");
-  nx.colorize("#60B3C8");
-  nx.showLabels = true;
-=======
   nx.colorize("accent", "#00DDCC");
   nx.colorize("border", "#000");
->>>>>>> Stashed changes:public/sequencer.js
 
   pattern.col = 16;
   pattern.row = Object.keys(sounds).length;
