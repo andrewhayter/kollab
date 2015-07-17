@@ -1,20 +1,11 @@
 
-
 (function() {
-    
 
-    //fixing
-   
     var context = new (AudioContext || webkitAudioContext)();
     var gainNode = context.createGain();
     var biquadFilter = context.createBiquadFilter();
-    // gainNode.gain.linearRampToValueAtTime(1.0, context.currentTime + 2); //'gain' is the AudioParam
     gainNode.connect(biquadFilter);
     biquadFilter.connect(context.destination);
-
-    // $('#gain-slider').on('change', function(e) {
-    //     gainNode.gain.value = this.value;
-    // });
 
     function wireUpOnChange(id, node, prop, noValue) {
         $(id).on('change', function() {
@@ -83,14 +74,12 @@
         console.log(this);
         if(!this.pressed) {
             this.pressed = true;
-            // this.gain.gain.value = 1;
             this.gain.gain.linearRampToValueAtTime(1, context.currentTime + 0.1);
         }
     };
 
     Sound.prototype.stop = function() {
         this.pressed = false;
-        // this.gain.gain.value = 0;
         this.gain.gain.linearRampToValueAtTime(0, context.currentTime + 0.1);
     };
 
@@ -142,15 +131,13 @@
             for(var keyCode in notes) {
                 notes[keyCode].key.sound.osc.type = this.value;
             }
-
-            // this.blur();
         };
 
 
         waveFormSelector.addEventListener('change', setWaveform);
 
 
-        window.addEventListener('keydown', function(event){            
+        window.addEventListener('keydown' , function(event){
             if (!$('#m').is(':focus')) {
                 socket.emit('play note', event.keyCode);    
             }; 
