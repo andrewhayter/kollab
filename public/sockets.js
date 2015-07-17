@@ -19,6 +19,8 @@ $('form').submit(function(){
 
 socket.on('chat message', function(msg){
   if (msg != '') {
+    var objDiv = document.getElementById("msg-board");
+    objDiv.scrollTop = objDiv.scrollHeight;
     $('#messages').append($('<li>').text(msg).css("border-radius","10px"));
   };
 });

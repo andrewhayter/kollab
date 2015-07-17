@@ -11,6 +11,7 @@ body {
 #msg-board {
   float:right;
   padding-right:200px;
+  position: fixed;
 }
 
 form {
