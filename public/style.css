@@ -1,5 +1,5 @@
-
-/**{
+/*
+*{
   border:1px dashed black;
 }
 */
@@ -9,9 +9,12 @@ body {
 }
 
 #msg-board {
-  float:right;
-  padding-right:200px;
-  position: fixed;
+  /*position: fixed;
+  float:right;*/  
+  width:400px;
+  height:300px;
+  overflow: auto;
+  background-color: red;
 }
 
 form {
@@ -35,7 +38,6 @@ form button {
   width: 60px;
   background: #7c70a0;
   border-radius: 50%;
-  /*padding: 10px;*/
 }
 
 #messages {
@@ -43,7 +45,9 @@ form button {
   margin: 0;
   padding: 0;
   width:20%;
-  position:absolute; 
+  position:absolute;
+  height: 100%;
+  overflow: scroll; 
 }
 
 
@@ -86,38 +90,18 @@ form button {
 /* keyboard */
 
 select {
-    font-size: 1em;
-    background-color: white;
+  font-size: 1em;
+  background-color: white;
 }
 
 
 #keyboard {
-    width: 80%;
-    float:left;
-    overflow: hidden;
-}
-
-#keyboard2 {
-    width: 80%;
-    background-color: red;
-    /*overflow: hidden;*/
-}
-
-.note {
-  background-color: red;
-  padding-right:10px;
-  width:60%;
-  height:100%;
-}
-
-.notepressed {
-  background-color: blue;
-    width:60%;
-  height:100%;
+  width: 80%;
+  float:left;
+  overflow: hidden;
 }
 
 .key {
-
   border-radius: 2px;
   color:#00DDCC;
   background: #fff;

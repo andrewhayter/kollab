@@ -17,6 +17,7 @@
         })
     };
 
+
     wireUpOnChange('#gain-slider', gainNode, 'gain');
     wireUpOnChange('#bqType', biquadFilter, 'type', true);
     wireUpOnChange('#bq-frequency-slider', biquadFilter, 'frequency');
@@ -74,13 +75,17 @@
         console.log(this);
         if(!this.pressed) {
             this.pressed = true;
-            this.gain.gain.linearRampToValueAtTime(1, context.currentTime + 0.1);
+            // console.log("attack value " + $('#attack').val());
+            this.gain.gain.linearRampToValueAtTime(1, context.currentTime + Number($('#attack').val()));
+
         }
     };
 
     Sound.prototype.stop = function() {
         this.pressed = false;
-        this.gain.gain.linearRampToValueAtTime(0, context.currentTime + 0.1);
+        // console.log("attack value " + $('#attack').val());
+        this.gain.gain.linearRampToValueAtTime(0, context.currentTime + Number($('#attack').val()));
+        
     };
 
     function keyboard(notes, containerId) {
