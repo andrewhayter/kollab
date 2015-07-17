@@ -31,7 +31,7 @@ var sounds = {};
 function loadSound(name, done)
 {
   var request = new XMLHttpRequest();
-  request.open('GET', 'dilla/' + name + '.wav', true);
+  request.open('GET', 'samples/dilla/' + name + '.wav', true);
   request.responseType = 'arraybuffer';
   request.onload = function soundWasLoaded() {
     audioContext.decodeAudioData(request.response, function(buffer) {
@@ -52,13 +52,13 @@ var soundNames = [
 
 function soundsLoaded()
 {
-  nx.sendsTo("js");
-  nx.colorize("#60B3C8");
-  nx.showLabels = true;
+  nx.colorize("accent", "#00DDCC");
+  nx.colorize("border", "#000000");
 
   pattern.col = 16;
   pattern.row = Object.keys(sounds).length;
-  pattern.resize($("#content").width(), 250);
+  pattern.resize($("#content").width(), 200);
+  pattern.bpm = bpmTempo;
   pattern.init();
   pattern.jumpToCol(-1);
 
@@ -98,6 +98,20 @@ function soundsLoaded()
   });
 
   volumeMeter.setup(audioContext, masterVolume);
+  bpm.min = 50;
+  bpm.max = 500;
+  bpm.decimalPlaces = 0;
+  bpm.rate = 2;
+
+  bpm.set({
+    value: parseInt(bpmTempo)
+  });
+  bpm.on('value', function(tempo) {
+    bpmTempo = tempo;
+    pattern.sequence(bpmTempo);
+  });
+  bpm.init();
+  bpm.draw();
 
   function play(buffer, kind)
   {

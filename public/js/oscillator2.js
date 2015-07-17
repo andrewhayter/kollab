@@ -52,8 +52,6 @@
         };
     };
 
-
-
     function Sound(frequency, type) {
         this.osc = context.createOscillator();
         this.gain = context.createGain();
@@ -65,14 +63,8 @@
         if(typeof frequency !== 'undefined') {
             this.osc.frequency.value = frequency;
         }
-<<<<<<< Updated upstream:public/oscillator2.js
-
-        this.osc.type = type || 'triangle';
-=======
         this.osc.type = type || 'sine';
->>>>>>> Stashed changes:public/js/oscillator2.js
         this.osc.start(0);
-
     };
 
 
@@ -99,9 +91,7 @@
 
         for(var keyCode in notes) {
             var note = notes[keyCode];
-
             note.key = new Key(note.noteName, note.frequency);
-
             sortedKeys.push(notes[keyCode]);
         }
 
@@ -118,11 +108,9 @@
 
         var playNote = function(keyHit) {
             var keyCode = keyHit;
-            console.log("this is key code " + keyCode);
 
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.play();
-
                 keyboardNotes[keyCode].key.html.className = 'key playing';
             }
         };
@@ -142,18 +130,13 @@
                 notes[keyCode].key.sound.osc.type = this.value;
             }
         };
-
-
         waveFormSelector.addEventListener('change', setWaveform);
-
 
         window.addEventListener('keydown' , function(event){
             if (!$('#m').is(':focus')) {
                 socket.emit('play note', event.keyCode);
             };
         });
-        
-
 
         socket.on('play note', function(event){
             console.log("should play note");
@@ -161,8 +144,6 @@
             console.log(event);
             playNote(event);
         });
-
-
 
         window.addEventListener('keyup', function(event){
             socket.emit('end note', event.keyCode);
@@ -177,8 +158,6 @@
             // console.log(event);
             endNote(event);
         });
-
-
     };
 
     window.addEventListener('load', function() {
