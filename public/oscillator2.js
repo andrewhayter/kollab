@@ -65,6 +65,7 @@
         this.osc.start(0);
     };
 
+
     Sound.prototype.play = function() {
         console.log(this);
         if(!this.pressed) {
@@ -101,6 +102,7 @@
 
         var playNote = function(keyHit) {
             var keyCode = keyHit;
+
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.play();
                 keyboardNotes[keyCode].key.html.className = 'key playing';
@@ -122,7 +124,6 @@
                 notes[keyCode].key.sound.osc.type = this.value;
             }
         };
-
         waveFormSelector.addEventListener('change', setWaveform);
 
         window.addEventListener('keydown' , function(event){

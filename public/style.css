@@ -1,7 +1,17 @@
 
+/**{
+  border:1px dashed black;
+}
+*/
 body {
   font: 17px Helvetica, Arial;
-  background-color: #88eadf;
+  background-color: #e0fffc;
+}
+
+#msg-board {
+  float:right;
+  padding-right:200px;
+  position: fixed;
 }
 
 form {
@@ -22,10 +32,10 @@ form input {
 }
 
 form button {
-  width: 40%;
+  width: 60px;
   background: #7c70a0;
-  border-radius: 20px;
-  padding: 10px;
+  border-radius: 50%;
+  /*padding: 10px;*/
 }
 
 #messages {
@@ -36,9 +46,9 @@ form button {
   position:absolute; 
 }
 
+
 #messages li {
   padding: 5px 10px;
-
 }
 
 #messages li:nth-child(odd) {
@@ -46,27 +56,90 @@ form button {
 }
 #messages li:nth-child(even) {
   background: #f7f4a8;
+
 }
 
 .musicboard {
-  float:right;
-}
-
-.note {
-  width:30px;
-  height:100px;
-  margin-right: 2px;
-  background:white;
-  float:right;
-  border-radius: 4px;
-  transition-duration:.5s;
-}
-
-.note.notepressed {
-  background:grey;
-  transition-duration:.5s;
+  float:left;
 }
 
 .slider.slider-value {
-  float:right;
+  float:left;
 }
+
+#gain-slider {
+  width:20%;
+}
+
+#bq-frequency-slider {
+  width:20%;
+}
+
+#bq-gain-slider {
+  width:20%;
+}
+
+#bq-detune-slider {
+  width:20%;
+}
+
+/* keyboard */
+
+select {
+    font-size: 1em;
+    background-color: white;
+}
+
+
+#keyboard {
+    width: 80%;
+    float:left;
+    overflow: hidden;
+}
+
+#keyboard2 {
+    width: 80%;
+    background-color: red;
+    /*overflow: hidden;*/
+}
+
+.note {
+  background-color: red;
+  padding-right:10px;
+  width:60%;
+  height:100%;
+}
+
+.notepressed {
+  background-color: blue;
+    width:60%;
+  height:100%;
+}
+
+.key {
+
+  border-radius: 2px;
+  color:#00DDCC;
+  background: #fff;
+  margin: 0 0.5%;
+  width: 2.5%;
+  padding: 3.5em 0;
+  text-align: center;
+  float: left;
+  text-transform: uppercase;
+  transition: margin 150ms ease-in-out;
+}
+
+.key:nth-child(even){
+  background: #00DDCC;
+  height:1px;
+  color:white;
+}
+
+.key.playing {
+  background: #02ffe9;
+  margin-top: 2em;
+}
+
+
+
