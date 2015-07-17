@@ -8,22 +8,29 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div id="content">
-    <canvas nx="matrix" id="pattern"></canvas>
-  </div>
 
-  <div id="controls">
-    <canvas nx="toggle" id="onOff"></canvas>
-    <canvas nx="dial" id="amp"></canvas>
-    <canvas nx="meter" id="volumeMeter"></canvas>
-    <canvas nx="dial" id="kickPitch"></canvas>
-    <canvas nx="dial" id="snarePitch"></canvas>
-    <canvas nx="dial" id="hihatPitch"></canvas>
-    <canvas nx="dial" id="kickVol"></canvas>
-    <canvas nx="dial" id="snareVol"></canvas>
-    <canvas nx="dial" id="hihatVol"></canvas>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-2">
+        <div id="controls">
+          <canvas nx="toggle" id="onOff"></canvas>
+          <canvas nx="dial" id="amp"></canvas>
+          <canvas nx="meter" id="volumeMeter"></canvas>
+          <canvas nx="dial" id="kickPitch"></canvas>
+          <canvas nx="dial" id="snarePitch"></canvas>
+          <canvas nx="dial" id="hihatPitch"></canvas>
+          <canvas nx="dial" id="kickVol"></canvas>
+          <canvas nx="dial" id="snareVol"></canvas>
+          <canvas nx="dial" id="hihatVol"></canvas>
+        </div>
+      </div>
+      <div class="col-sm-offset-0 col-sm-8">
+        <div id="content">
+          <canvas nx="matrix" id="pattern"></canvas>
+        </div>
+      </div>
+    </div>
   </div>
-
   <select name="soundType" id="soundType">
     <option value="triangle" selected>Triangle</option>
     <option value="sine">Sine</option>
@@ -55,12 +62,12 @@
 
   <div id="keyboard">
   </div>
-<!--   <div id="msg-board">
+  <div id="msg-board">
     <ul id="messages"></ul>
     <form action="">
       <input class="form-control" id="m" autocomplete="off" /><button class="btn">></button>
     </form>
-  </div> -->
+  </div>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="nexusUI.js"></script>

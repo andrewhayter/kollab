@@ -52,9 +52,7 @@ var soundNames = [
 
 function soundsLoaded()
 {
-  nx.sendsTo("js");
-  nx.colorize("#60B3C8");
-  nx.showLabels = true;
+  nx.colorize("#00DDCC");
 
   pattern.col = 16;
   pattern.row = Object.keys(sounds).length;
