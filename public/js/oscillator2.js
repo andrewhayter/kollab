@@ -1,9 +1,11 @@
-
 (function() {
 
     var context = new (AudioContext || webkitAudioContext)();
     var gainNode = context.createGain();
     var biquadFilter = context.createBiquadFilter();
+
+    var now = context.currentTime;
+
     gainNode.connect(biquadFilter);
     biquadFilter.connect(context.destination);
 
@@ -16,7 +18,6 @@
             };
         })
     };
-
 
     wireUpOnChange('#gain-slider', gainNode, 'gain');
     wireUpOnChange('#bqType', biquadFilter, 'type', true);
@@ -40,7 +41,7 @@
 
     function Key(noteName, frequency) {
         var keyHTML = document.createElement('div');
-        var keySound = new Sound(frequency, 'triangle');
+        var keySound = new Sound(frequency, 'sine');
 
         keyHTML.className = 'key';
         keyHTML.innerHTML = noteName + '<br>';
@@ -62,7 +63,15 @@
         if(typeof frequency !== 'undefined') {
             this.osc.frequency.value = frequency;
         }
+<<<<<<< HEAD:public/js/oscillator2.js
+=======
+<<<<<<< Updated upstream:public/oscillator2.js
+
+>>>>>>> 8dfc513aa8dcbfe3056a55aa533719500caf7b26:public/oscillator2.js
         this.osc.type = type || 'triangle';
+=======
+        this.osc.type = type || 'sine';
+>>>>>>> Stashed changes:public/js/oscillator2.js
         this.osc.start(0);
     };
 
@@ -72,7 +81,7 @@
         if(!this.pressed) {
             this.pressed = true;
             // console.log("attack value " + $('#attack').val());
-            this.gain.gain.linearRampToValueAtTime(1, context.currentTime + Number($('#attack').val()));
+            this.gain.gain.linearRampToValueAtTime(1, now + Number($('#attack').val()));
 
         }
     };
@@ -80,8 +89,8 @@
     Sound.prototype.stop = function() {
         this.pressed = false;
         // console.log("attack value " + $('#attack').val());
-        this.gain.gain.linearRampToValueAtTime(0, context.currentTime + Number($('#attack').val()));
-        
+        this.gain.gain.linearRampToValueAtTime(0, now + Number($('#attack').val()));
+
     };
 
     function keyboard(notes, containerId) {
@@ -149,7 +158,6 @@
             console.log(event.keyCode);
             console.log("keydown " + event.keyCode);
         });
-
 
         socket.on('end note', function(event){
             // console.log("should end note");
