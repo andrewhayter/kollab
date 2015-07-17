@@ -8,15 +8,6 @@ body {
   background-color: #e0fffc;
 }
 
-#msg-board {
-  /*position: fixed;
-  float:right;*/  
-  width:400px;
-  height:300px;
-  overflow: auto;
-  background-color: red;
-}
-
 form {
   background: #464b51;
   padding: 3px;
