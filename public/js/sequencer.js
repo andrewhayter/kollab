@@ -31,7 +31,7 @@ var sounds = {};
 function loadSound(name, done)
 {
   var request = new XMLHttpRequest();
-  request.open('GET', 'dilla/' + name + '.wav', true);
+  request.open('GET', 'samples/dilla/' + name + '.wav', true);
   request.responseType = 'arraybuffer';
   request.onload = function soundWasLoaded() {
     audioContext.decodeAudioData(request.response, function(buffer) {
