@@ -42,7 +42,7 @@
         var keyHTML = document.createElement('div');
         var keySound = new Sound(frequency, 'triangle');
 
-        keyHTML.className = 'key';
+        keyHTML.className = 'key col-sm-6';
         keyHTML.innerHTML = noteName + '<br>';
 
         return {
@@ -110,7 +110,7 @@
 
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.play();
-                keyboardNotes[keyCode].key.html.className = 'key playing';
+                keyboardNotes[keyCode].key.html.className = 'key playing col-sm-6';
             }
         };
 
@@ -120,7 +120,7 @@
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.stop();
 
-                keyboardNotes[keyCode].key.html.className = 'key';
+                keyboardNotes[keyCode].key.html.className = 'key col-sm-6';
             }
         };
 
