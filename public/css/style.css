@@ -103,6 +103,9 @@ select {
   background-color: white;
 }
 
+.user-name {
+  background-color: black;
+}
 
 #keyboard {
 }
