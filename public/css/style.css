@@ -3,12 +3,61 @@
   border:1px dashed black;
 }
 */
+
+
 body {
   font: 17px Helvetica, Arial;
   background-color: #f7fffe;
 }
 
-form {
+.user-name {
+    position:fixed;
+    padding:0;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+
+    background: #00ddcc; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #00ddcc 24%, #59a8e5 83%); 
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(24%,#00ddcc), color-stop(83%,#59a8e5)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); 
+    background: -o-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #00ddcc 24%,#59a8e5 83%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ddcc', endColorstr='#59a8e5',GradientType=1 );   
+    
+}
+
+
+.login-form {
+  padding: 2px;
+  border-radius: 10px;
+  bottom: 0;
+  width: 19%;
+  text-align: center;
+  margin: auto;
+  margin-top:280px;
+  position: relative;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.login-input {
+  border: 0;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  margin-right: .5%;
+  position: relative;
+  margin:auto;
+  font-size: 1em;
+  text-align: center
+}
+
+
+.chat-form {
   background: #EEEEEE;
   padding: 3px;
   position: fixed;
@@ -17,7 +66,7 @@ form {
   width: 18.5%;
 }
 
-form input {
+.chat-input {
   border: 0;
   padding: 10px;
   width: 50%;
@@ -25,7 +74,7 @@ form input {
   margin-right: .5%;
 }
 
-form button {
+.submit-button {
   width: 60px;
   background: #53B2A9;
   border-radius: 50%;
@@ -103,8 +152,9 @@ select {
   background-color: white;
 }
 
-.user-name {
-  background-color: black;
+
+
+.navbar {
 }
 
 #keyboard {

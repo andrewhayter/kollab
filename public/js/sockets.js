@@ -1,7 +1,7 @@
 var socket = io();
 
 
-$('form').submit(function(){
+$('.chat-form').submit(function(){
   socket.emit('chat message', $('#m').val());
   $('#m').val('');
   return false;
@@ -19,5 +19,11 @@ $('.submit-button').click(function(){
   $('#messages').scrollTop( el.scrollHeight );
 });
 
+$('.login-form').submit(function(){
+  socket.emit('username', $('.login-input').val());
+  $('.user-name').fadeOut();
+  // alert("heelo");
+  return false;
+});
 
 

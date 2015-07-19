@@ -135,7 +135,7 @@
         waveFormSelector.addEventListener('change', setWaveform);
 
         window.addEventListener('keydown' , function(event){
-            if (!$('#m').is(':focus')) {
+            if (!$('#m').is(':focus') && !$('.login-input').is(':focus') ) {
                 socket.emit('play note', event.keyCode);
             };
         });
