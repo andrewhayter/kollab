@@ -43,7 +43,7 @@
         var keyHTML = document.createElement('div');
         var keySound = new Sound(frequency, 'sine');
 
-        keyHTML.className = 'key';
+        keyHTML.className = 'key col-sm-6';
         keyHTML.innerHTML = noteName + '<br>';
 
         return {
@@ -63,15 +63,9 @@
         if(typeof frequency !== 'undefined') {
             this.osc.frequency.value = frequency;
         }
-<<<<<<< HEAD:public/js/oscillator2.js
-=======
-<<<<<<< Updated upstream:public/oscillator2.js
 
->>>>>>> 8dfc513aa8dcbfe3056a55aa533719500caf7b26:public/oscillator2.js
-        this.osc.type = type || 'triangle';
-=======
         this.osc.type = type || 'sine';
->>>>>>> Stashed changes:public/js/oscillator2.js
+
         this.osc.start(0);
     };
 
@@ -119,7 +113,7 @@
 
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.play();
-                keyboardNotes[keyCode].key.html.className = 'key playing';
+                keyboardNotes[keyCode].key.html.className = 'key playing col-sm-6';
             }
         };
 
@@ -129,7 +123,7 @@
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.stop();
 
-                keyboardNotes[keyCode].key.html.className = 'key';
+                keyboardNotes[keyCode].key.html.className = 'key col-sm-6';
             }
         };
 

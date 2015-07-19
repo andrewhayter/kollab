@@ -8,10 +8,37 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand text-center" href="#">Kolab</a>
+    </div>
+  </div>
+</nav>
+
+ 
 
   <div class="container">
+
+
+      <div class="message-board col-sm-offset-9 col-sm-3">
+        <ul id="messages"></ul>
+        <form action="">
+          <input class="form-control" id="m" autocomplete="off" /><button class="btn submit-button">></button>
+        </form>
+      </div>
+ 
+
     <div class="row">
-      <div class="col-sm-offset-1 col-sm-2">
+      <div class="col-sm-offset-0 col-sm-10">
+        <div id="content">
+          <canvas nx="matrix" id="pattern"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-offset-2 col-sm-6">
         <div id="controls">
           <canvas nx="toggle" id="onOff"></canvas>
           <canvas nx="dial" id="amp"></canvas>
@@ -25,12 +52,52 @@
           <canvas nx="dial" id="hihatVol"></canvas>
         </div>
       </div>
-      <div class="col-sm-offset-0 col-sm-8">
-        <div id="content">
-          <canvas nx="matrix" id="pattern"></canvas>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-offset-0 col-sm-10">
+        <div id="effects">
+          <h1 class="text-center">effects here</h1>
         </div>
       </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-sm-offset-2 col-sm-6">
+          <label>BiquadFilter</label>
+          <select name="bqType" id="bqType">
+            <option value="lowpass" selected>Lowpass</option>
+            <option value="highpass">Highpass</option>
+            <option value="bandpass">Bandpass</option>
+            <option value="lowshelf">Lowshelf</option>
+            <option value="highshelf">Highshelf</option>
+            <option value="peaking">Peaking</option>
+            <option value="notch">Notch</option>
+            <option value="allpass">Allpass</option>
+          </select>
+
+          <label>Wave</label>
+          <select name="soundType" id="soundType">
+            <option value="triangle" selected>Triangle</option>
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="sawtooth">Sawtooth</option>
+          </select>
+
+        <div id="controls">         
+          <canvas nx="meter" id=""></canvas>
+          <canvas nx="dial" id=""></canvas>          
+          <canvas nx="dial" id=""></canvas>
+          <canvas nx="dial" id=""></canvas>
+          <canvas nx="dial" id=""></canvas>
+          <canvas nx="dial" id=""></canvas>
+          <canvas nx="dial" id=""></canvas>
+          <canvas nx="dial" id=""></canvas>
+        </div>
+
+      </div>
     </div>
+<<<<<<< HEAD
   </div>
   
   <select name="soundType" id="soundType">
@@ -66,13 +133,35 @@
 
   <div id="keyboard">
   </div>
+=======
+>>>>>>> 90deb2f88cedcffff4283c66c2e76cf9156f1ced
 
-  <div id="msg-board">
-    <ul id="messages"></ul>
-    <form action="">
-      <input class="form-control" id="m" autocomplete="off" /><button class="btn">></button>
-    </form>
+    <div class="row">
+        <div class="cold-sm-offset-0 col-sm-12" id="keyboard">
+        </div>
+    </div>
+
+  
+      <label>Volume</label>
+      <input class="form-control" id="gain-slider" min="0" max="5" value="2.5" step="0.1" type="range" autocomplete="off" >
+      
+
+
+
+      <span>Frequency</span>
+      <input class="form-control" id="bq-frequency-slider" min="0" max="750" value="375" step="10" type="range" autocomplete="off" >
+      <span>Gain</span>
+      <input class="form-control" id="bq-gain-slider" min="0" max="50" value="25" step="5" type="range" autocomplete="off" >
+      <span>Detune</span>
+      <input class="form-control" id="bq-detune-slider" min="0" max="500" value="250" step="10" type="range" autocomplete="off" >
+      <span>Attack?</span>
+      <input class="form-control" id="attack" min="0.1" max="0.6" value="0.2" step="0.05" type="range" autocomplete="off" >
+
+
+  
+
   </div>
+
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="js/nexusUI.js"></script>

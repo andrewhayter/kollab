@@ -5,25 +5,16 @@
 */
 body {
   font: 17px Helvetica, Arial;
-  background-color: #e0fffc;
-}
-
-#msg-board {
-  /*position: fixed;
-  float:right;*/  
-  width:400px;
-  height:300px;
-  overflow: auto;
-  background-color: red;
+  background-color: #f7fffe;
 }
 
 form {
-  background: #464b51;
+  background: #EEEEEE;
   padding: 3px;
   position: fixed;
   border-radius: 10px;
   bottom: 0;
-  width: 20%;
+  width: 18.5%;
 }
 
 form input {
@@ -36,30 +27,44 @@ form input {
 
 form button {
   width: 60px;
-  background: #7c70a0;
+  background: #53B2A9;
   border-radius: 50%;
+}
+
+#m {
+  position: relative;
+}
+
+#effects {
+  height:100px;
+  background-color: #53b2a9;
+  margin-bottom: 20px;
+}
+
+.message-board {
+  position: fixed;
+  z-index: 999;
 }
 
 #messages {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width:20%;
-  position:absolute;
-  height: 100%;
-  overflow: scroll; 
+  height: 525px;
+  overflow: auto; 
 }
 
-
 #messages li {
+  position: relative;
   padding: 5px 10px;
+  width: 234px;
 }
 
 #messages li:nth-child(odd) {
-  background: #96ffd3;
+  background: #00DDCC;
 }
 #messages li:nth-child(even) {
-  background: #f7f4a8;
+  background: #EEEEEE;
 
 }
 
@@ -87,6 +92,10 @@ form button {
   width:20%;
 }
 
+#attack {
+  width: 20%;
+}
+
 /* keyboard */
 
 select {
@@ -96,33 +105,30 @@ select {
 
 
 #keyboard {
-  width: 80%;
-  float:left;
-  overflow: hidden;
 }
 
 .key {
   border-radius: 2px;
   color:#00DDCC;
-  background: #fff;
+  background: #EEEEEE;
   margin: 0 0.5%;
   width: 2.5%;
   padding: 3.5em 0;
   text-align: center;
-  float: left;
+  /*float: left;*/
   text-transform: uppercase;
-  transition: margin 150ms ease-in-out;
+  /*transition: margin 150ms ease-in-out;*/
 }
 
 .key:nth-child(even){
   background: #00DDCC;
-  height:1px;
   color:white;
 }
 
 .key.playing {
   background: #02ffe9;
-  margin-top: 2em;
+  color: white;
+  /*margin-top: 2em;*/
 }
 
 
