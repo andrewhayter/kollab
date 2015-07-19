@@ -12,6 +12,11 @@ socket.on('chat message', function(msg){
   };
 });
 
+var el = document.getElementById('messages');
+
+$('.submit-button').click(function(){
+  $('#messages').scrollTop( el.scrollHeight );
+});
 
 
 

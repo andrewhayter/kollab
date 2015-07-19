@@ -14,7 +14,7 @@ form {
   position: fixed;
   border-radius: 10px;
   bottom: 0;
-  width: 20%;
+  width: 18.5%;
 }
 
 form input {
@@ -38,24 +38,26 @@ form button {
 #effects {
   height:100px;
   background-color: #53b2a9;
+  margin-bottom: 20px;
 }
 
 .message-board {
   position: fixed;
-  /*overflow:auto;*/
+  z-index: 999;
 }
 
 #messages {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 525px;
   overflow: auto; 
 }
 
 #messages li {
-  /*position: fixed;*/
+  position: relative;
   padding: 5px 10px;
+  width: 234px;
 }
 
 #messages li:nth-child(odd) {
@@ -103,7 +105,6 @@ select {
 
 
 #keyboard {
-  /*overflow: hidden;*/
 }
 
 .key {
@@ -121,12 +122,12 @@ select {
 
 .key:nth-child(even){
   background: #00DDCC;
-  /*height:1px;*/
   color:white;
 }
 
 .key.playing {
   background: #02ffe9;
+  color: white;
   /*margin-top: 2em;*/
 }
 
