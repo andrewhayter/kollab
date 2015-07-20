@@ -7,11 +7,11 @@ $('.chat-form').submit(function(msg){
   return false;
 });
 
+
+
 socket.on('chat message', function(data){
-  // console.log(boldName);
-  // console.log(data.username);
   if (data.message != '') {
-    $('#messages').append($('<li>').text(data.message).css("border-radius","10px"));
+    $('#messages').append($('<li>').text(data.username + ": " + data.message).css("border-radius","10px"));
     console.log(data.message);
   };
 });
@@ -27,15 +27,13 @@ $('.login-input').focus();
 
 $('.login-form').submit(function(username){
   socket.emit('add user', $('#log-input').val());
-  // console.log(username);
   $('.user-name').fadeOut(1500);
   return false;
 });
 
 socket.on('user joined', function (data) {
-  // log(data.username + ' joined');
-  $('#messages').append($('<li>').text(data.username + " has joined").css("border-radius","10px"));
-  // console.log("hello " + data.username);
+  $('#messages').append($('<li>').text(data.username + " has joined").css("background","none").css("font-style", "italic"));
+
 });
 
 

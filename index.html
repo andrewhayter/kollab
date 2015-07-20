@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div class="user-name">
+<div class="user-name">\
   <form class="login-form" action="">
     <h3>Username</h3>
     <input class="login-input form-control" id="log-input" autocomplete="off" />
@@ -46,27 +46,59 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-offset-2 col-sm-6">
-        <div id="controls">
-          <canvas nx="toggle" id="onOff"></canvas><br >
-          <canvas nx="dial" id="amp"></canvas><br >
-          <p class="labels">Master Vol</p><br >
-          <canvas nx="meter" id="volumeMeter"></canvas><br >
-          <canvas nx="number" id="bpm"></canvas><br >
-          <p class="labels">BPM</p><br >
-          <canvas nx="dial" id="kickPitch"></canvas><br >
-          <p class="labels">Kick Pitch</p><br >
-          <canvas nx="dial" id="snarePitch"></canvas><br >
-          <p class="labels">Snare Pitch</p><br >
-          <canvas nx="dial" id="hihatPitch"></canvas><br >
-          <p class="labels">Hihat Pitch</p><br >
-          <canvas nx="dial" id="kickVol"></canvas><br >
-          <p class="labels">Kick Vol</p><br >
-          <canvas nx="dial" id="snareVol"></canvas><br >
-          <p class="labels">Snare Vol</p><br >
-          <canvas nx="dial" id="hihatVol"></canvas><br >
-          <p class="labels">Hihat Vol</p><br >
+      <div id="controls">
+
+        <div class="col-md-offset-1 col-md-1">                   
+          <canvas nx="toggle" id="onOff"></canvas>
         </div>
+
+        <div class="col-md-0">          
+          <canvas nx="dial" id="amp"></canvas>
+          <p class="labels">Master Vol</p>
+        </div>
+
+        <div class="col-md-0">          
+          <canvas nx="meter" id="volumeMeter"></canvas>
+        </div>
+
+        <div class="col-md-1">                   
+          <canvas nx="number" id="bpm"></canvas>
+          <p class="labels">BPM</p>
+        </div>
+        
+        <p class="seq-type">Kick</p>
+        <div class="col-md-1">        
+          <canvas nx="dial" id="kickPitch"></canvas>
+          <p class="labels">Pitch</p>
+        </div>
+
+        <div class="col-md-1">
+          <canvas nx="dial" id="kickVol"></canvas>
+          <p class="labels">Vol</p>
+        </div>
+
+        <p class="seq-type">Snare</p>
+        <div class="col-md-1">
+          <canvas nx="dial" id="snarePitch"></canvas>
+          <p class="labels">Pitch</p>
+        </div>
+
+         <div class="col-md-1">
+          <canvas nx="dial" id="snareVol"></canvas>
+          <p class="labels">Vol</p>
+        </div>
+
+        <p class="seq-type">Hihat</p>
+        <div class="col-md-1">
+          <canvas nx="dial" id="hihatPitch"></canvas>
+          <p class="labels">Pitch</p>
+        </div>
+
+        <div class="col-md-1">
+          <canvas nx="dial" id="hihatVol"></canvas>
+          <p class="labels">Vol</p>
+        </div>
+
       </div>
     </div>
 
@@ -100,7 +132,8 @@
             <option value="sawtooth">Sawtooth</option>
           </select>
 
-        <div id="controls">         
+      <!--   <div id="controls">
+
           <canvas nx="meter" id=""></canvas>
           <canvas nx="dial" id=""></canvas>          
           <canvas nx="dial" id=""></canvas>
@@ -109,19 +142,12 @@
           <canvas nx="dial" id=""></canvas>
           <canvas nx="dial" id=""></canvas>
           <canvas nx="dial" id=""></canvas>
-        </div>
+        </div> -->
 
       </div>
     </div>
-
-
-    <div class="row">
-        <div class="" id="keyboard">
-        </div>
-    </div>
-
   
-      <label>Volume</label>
+  <!--     <label>Volume</label>
       <input class="form-control" id="gain-slider" min="0" max="5" value="2.5" step="0.1" type="range" autocomplete="off" >
       
 
@@ -136,7 +162,7 @@
       <span>Attack?</span>
       <input class="form-control" id="attack" min="0.1" max="0.6" value="0.2" step="0.05" type="range" autocomplete="off" >
 
-
+ -->
   
 
   </div>

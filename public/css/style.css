@@ -117,6 +117,10 @@ body {
 
 }
 
+.user-join {
+  background: none;
+}
+
 .musicboard {
   float:left;
 }
@@ -164,6 +168,25 @@ select {
 .navbar {
 }
 
+.seq-type {
+  margin-top: 17px;
+  margin-left: 20px;
+}
+
+#controls {
+  display: -webkit-inline-box;
+}
+
+.labels {
+  font-size: .7em;
+  text-align: center;
+  margin-left: 10px;
+}
+
+
+.navbar {
+}
+
 #keyboard {
   margin-left:20%;
 }
@@ -195,6 +218,8 @@ select {
   color: white;
   /*margin-top: 2em;*/
 }
+
+.
 
 
 
