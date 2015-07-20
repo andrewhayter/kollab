@@ -23,6 +23,20 @@ form input {
   width: 50%;
   border-radius: 20px;
   margin-right: .5%;
+  position: relative;
+  margin:auto;
+  font-size: 1em;
+  text-align: center
+}
+
+
+.chat-form {
+  background: #EEEEEE;
+  padding: 3px;
+  position: relative;
+  border-radius: 20px;
+  bottom: 0;
+  width: 100%;
 }
 
 form button {
@@ -37,7 +51,7 @@ form button {
 
 #effects {
   height:100px;
-  background-color: #53b2a9;
+  background-color: #;
   margin-bottom: 20px;
 }
 
@@ -63,6 +77,7 @@ form button {
 #messages li:nth-child(odd) {
   background: #00DDCC;
 }
+
 #messages li:nth-child(even) {
   background: #EEEEEE;
 
