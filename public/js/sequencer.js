@@ -141,15 +141,24 @@ function soundsLoaded()
   }
 });
 
-  onOff.on('*', function(data)
-  {
+
+
+//mission add on off to socket
+  onOff.on('*', function(data) { 
+    socket.emit('pattern play', data);
+  });
+
+  socket.on('pattern play', function(data){
     if (data.value == 1) {
       pattern.sequence(bpmTempo);
     } else {
       pattern.stop();
     }
-  });
+  })
+
+
 }
+
 
 function loadNextSound()
 {

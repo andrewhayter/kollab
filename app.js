@@ -37,6 +37,10 @@ io.on('connection', function(socket){
     console.log("hello");
   });
 
+  socket.on('pattern play', function(data){
+    io.emit('pattern play', data);
+  })
+
   socket.on('add user', function(username){
    socket.username = username;
     users[username] = username;
