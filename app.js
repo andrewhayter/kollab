@@ -20,25 +20,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 //messages
 //keeping with socket as opposed to client for user
 io.on('connection', function(socket){
-  var addedUser = false;
+  // var addedUser = false;
+
   console.log('a user connected');
 
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
 
+
+
   socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+    io.emit('chat message',{ message: msg, username: socket.username });
     console.log(msg);
+    console.log("username" + socket.username);
     console.log("hello");
   });
 
-  socket.on("join", function(name){
-      people[socket.id] = name;
-      socket.emit("update", "You have connected to the server.");
-      socket.sockets.emit("update", name + " has joined the server.")
-      console.log(name);
-      socket.sockets.emit("update-people", people);
+  socket.on('add user', function(username){
+   socket.username = username;
+    users[username] = username;
+    ++userCount;
+
+    // addedUser = true;
+    // socket.emit('login', {
+    //   userCount: userCount
+    // });
+
+    socket.broadcast.emit('user joined', {
+      username: socket.username,
+      userCount: userCount
+    });
   });
 
 
@@ -46,13 +58,15 @@ io.on('connection', function(socket){
 
 
 
-// Receving empty object
+
+
+//music
   socket.on('play note', function(event){
     io.emit('play note', event);
     console.log("server playNote"+ event);
     console.log(event);
   });
-//music
+
   socket.on('sound', function(){
     io.emit('sound');
   });
