@@ -113,7 +113,7 @@
 
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.play();
-                keyboardNotes[keyCode].key.html.className = 'key playing col-sm-6';
+                keyboardNotes[keyCode].key.html.className = 'key playing col-sm-2';
             }
         };
 
@@ -123,7 +123,7 @@
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.stop();
 
-                keyboardNotes[keyCode].key.html.className = 'key col-sm-6';
+                keyboardNotes[keyCode].key.html.className = 'key col-sm-2';
             }
         };
 

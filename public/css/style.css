@@ -3,24 +3,51 @@
   border:1px dashed black;
 }
 */
+
+
 body {
   font: 17px Helvetica, Arial;
   background-color: #f7fffe;
 }
 
-form {
-  background: #EEEEEE;
-  padding: 3px;
-  position: fixed;
-  border-radius: 10px;
-  bottom: 0;
-  width: 18.5%;
+.user-name {
+    position:fixed;
+    padding:0;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+
+    background: #00ddcc; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #00ddcc 24%, #59a8e5 83%); 
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(24%,#00ddcc), color-stop(83%,#59a8e5)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); 
+    background: -o-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #00ddcc 24%,#59a8e5 83%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ddcc', endColorstr='#59a8e5',GradientType=1 );   
+    
 }
 
-form input {
+
+.login-form {
+  padding: 2px;
+  border-radius: 10px;
+  bottom: 0;
+  width: 19%;
+  text-align: center;
+  margin: auto;
+  margin-top:280px;
+  position: relative;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.login-input {
   border: 0;
   padding: 10px;
-  width: 50%;
+  width: 100%;
   border-radius: 20px;
   margin-right: .5%;
   position: relative;
@@ -39,14 +66,21 @@ form input {
   width: 100%;
 }
 
-form button {
-  width: 60px;
+.submit-button {
+  width: 35px;
   background: #53B2A9;
   border-radius: 50%;
 }
 
 #m {
-  position: relative;
+  border: 0;
+  padding: 10px;
+  width: 80%;
+  display: inline;
+  margin-right: 5px;
+  border-radius: 20px;
+  /*margin-right: .5%;*/
+  /*position: relative;*/
 }
 
 #effects {
@@ -66,12 +100,13 @@ form button {
   padding: 0;
   height: 525px;
   overflow: auto; 
+  width: 90%;
 }
 
 #messages li {
-  position: relative;
+  position: inherit;
   padding: 5px 10px;
-  width: 234px;
+  width: 100%;
 }
 
 #messages li:nth-child(odd) {
@@ -122,6 +157,17 @@ select {
   background-color: white;
 }
 
+#controls {
+  /*display:-webkit-box;*/
+}
+
+.labels {
+  font-size: .7em;
+}
+
+
+.navbar {
+}
 
 .seq-type {
   margin-top: 17px;
@@ -143,24 +189,29 @@ select {
 }
 
 #keyboard {
+  margin-left:20%;
 }
 
 .key {
   border-radius: 2px;
-  color:#00DDCC;
-  background: #EEEEEE;
   margin: 0 0.5%;
   width: 2.5%;
   padding: 3.5em 0;
   text-align: center;
-  /*float: left;*/
   text-transform: uppercase;
   /*transition: margin 150ms ease-in-out;*/
 }
 
 .key:nth-child(even){
   background: #00DDCC;
+  height: 5px;
   color:white;
+}
+
+.key:nth-child(odd){
+  background: #EEEEEE;
+  /*margin-top: 15px;*/
+  color:#00DDCC;
 }
 
 .key.playing {

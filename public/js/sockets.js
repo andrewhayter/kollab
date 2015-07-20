@@ -1,10 +1,12 @@
 var socket = io();
 
-$('form').submit(function(){
+
+$('.chat-form').submit(function(msg){
   socket.emit('chat message', $('#m').val());
   $('#m').val('');
   return false;
 });
+
 
 
 socket.on('chat message', function(data){
@@ -13,6 +15,7 @@ socket.on('chat message', function(data){
     console.log(data.message);
   };
 });
+
 
 var el = document.getElementById('messages');
 
@@ -30,6 +33,7 @@ $('.login-form').submit(function(username){
 
 socket.on('user joined', function (data) {
   $('#messages').append($('<li>').text(data.username + " has joined").css("background","none").css("font-style", "italic"));
+
 });
 
 
