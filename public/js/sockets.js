@@ -8,10 +8,10 @@ $('.chat-form').submit(function(msg){
 });
 
 socket.on('chat message', function(data){
-  // var boldName = data.username.css("font-weight", "bold");
-  console.log(data.username);
+  // console.log(boldName);
+  // console.log(data.username);
   if (data.message != '') {
-    $('#messages').append($('<li>').text(data.username + ": " + data.message).css("border-radius","10px"));
+    $('#messages').append($('<li>').text(data.message).css("border-radius","10px"));
     console.log(data.message);
   };
 });

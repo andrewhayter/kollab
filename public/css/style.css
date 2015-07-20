@@ -60,28 +60,27 @@ body {
 .chat-form {
   background: #EEEEEE;
   padding: 3px;
-  position: fixed;
+  position: relative;
   border-radius: 10px;
   bottom: 0;
-  width: 18.5%;
-}
-
-.chat-input {
-  border: 0;
-  padding: 10px;
-  width: 50%;
-  border-radius: 20px;
-  margin-right: .5%;
+  width: 100%;
 }
 
 .submit-button {
-  width: 60px;
+  width: 35px;
   background: #53B2A9;
   border-radius: 50%;
 }
 
 #m {
-  position: relative;
+  border: 0;
+  padding: 10px;
+  width: 80%;
+  display: inline;
+  margin-right: 5px;
+  border-radius: 20px;
+  /*margin-right: .5%;*/
+  /*position: relative;*/
 }
 
 #effects {
@@ -101,12 +100,13 @@ body {
   padding: 0;
   height: 525px;
   overflow: auto; 
+  width: 90%;
 }
 
 #messages li {
-  position: relative;
+  position: inherit;
   padding: 5px 10px;
-  width: 234px;
+  width: 100%;
 }
 
 #messages li:nth-child(odd) {
@@ -152,30 +152,42 @@ select {
   background-color: white;
 }
 
+#controls {
+  /*display:-webkit-box;*/
+}
+
+.labels {
+  font-size: .7em;
+}
 
 
 .navbar {
 }
 
 #keyboard {
+  margin-left:20%;
 }
 
 .key {
   border-radius: 2px;
-  color:#00DDCC;
-  background: #EEEEEE;
   margin: 0 0.5%;
   width: 2.5%;
   padding: 3.5em 0;
   text-align: center;
-  /*float: left;*/
   text-transform: uppercase;
   /*transition: margin 150ms ease-in-out;*/
 }
 
 .key:nth-child(even){
   background: #00DDCC;
+  height: 5px;
   color:white;
+}
+
+.key:nth-child(odd){
+  background: #EEEEEE;
+  /*margin-top: 15px;*/
+  color:#00DDCC;
 }
 
 .key.playing {

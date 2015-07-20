@@ -11,7 +11,7 @@
 
 <div class="user-name">
   <form class="login-form" action="">
-    <h3>Enter your username</h3>
+    <h3>Username</h3>
     <input class="login-input form-control" id="log-input" autocomplete="off" />
   </form>
 </div>
@@ -32,7 +32,7 @@
       <div class="message-board col-sm-offset-9 col-sm-3">
         <ul id="messages"></ul>
         <form class="chat-form" action="">
-          <input class="chat-input form-control" id="m" autocomplete="off" /><button class="btn submit-button">></button>
+          <input class="chat-input form-control" id="m" autocomplete="off" /><button class="form-control btn submit-button">></button>
         </form>
       </div>
  
@@ -48,16 +48,24 @@
     <div class="row">
       <div class="col-sm-offset-2 col-sm-6">
         <div id="controls">
-          <canvas nx="toggle" id="onOff"></canvas>
-          <canvas nx="dial" id="amp"></canvas>
-          <canvas nx="meter" id="volumeMeter"></canvas>
-          <canvas nx="number" id="bpm"></canvas>
-          <canvas nx="dial" id="kickPitch"></canvas>
-          <canvas nx="dial" id="snarePitch"></canvas>
-          <canvas nx="dial" id="hihatPitch"></canvas>
-          <canvas nx="dial" id="kickVol"></canvas>
-          <canvas nx="dial" id="snareVol"></canvas>
-          <canvas nx="dial" id="hihatVol"></canvas>
+          <canvas nx="toggle" id="onOff"></canvas><br >
+          <canvas nx="dial" id="amp"></canvas><br >
+          <p class="labels">Master Vol</p><br >
+          <canvas nx="meter" id="volumeMeter"></canvas><br >
+          <canvas nx="number" id="bpm"></canvas><br >
+          <p class="labels">BPM</p><br >
+          <canvas nx="dial" id="kickPitch"></canvas><br >
+          <p class="labels">Kick Pitch</p><br >
+          <canvas nx="dial" id="snarePitch"></canvas><br >
+          <p class="labels">Snare Pitch</p><br >
+          <canvas nx="dial" id="hihatPitch"></canvas><br >
+          <p class="labels">Hihat Pitch</p><br >
+          <canvas nx="dial" id="kickVol"></canvas><br >
+          <p class="labels">Kick Vol</p><br >
+          <canvas nx="dial" id="snareVol"></canvas><br >
+          <p class="labels">Snare Vol</p><br >
+          <canvas nx="dial" id="hihatVol"></canvas><br >
+          <p class="labels">Hihat Vol</p><br >
         </div>
       </div>
     </div>
@@ -108,7 +116,7 @@
 
 
     <div class="row">
-        <div class="cold-sm-offset-0 col-sm-12" id="keyboard">
+        <div class="" id="keyboard">
         </div>
     </div>
 
