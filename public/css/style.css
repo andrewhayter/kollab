@@ -85,7 +85,7 @@ body {
 
 #effects {
   height:100px;
-  background-color: #;
+  background-color: #00DDCC;
   margin-bottom: 20px;
 }
 
@@ -157,14 +157,14 @@ select {
   background-color: white;
 }
 
-#controls {
-  /*display:-webkit-box;*/
+#controls, #synth-controls {
+  display:-webkit-inline-box;
+  /*background-color: red;*/
 }
 
 .labels {
   font-size: .7em;
 }
-
 
 .navbar {
 }

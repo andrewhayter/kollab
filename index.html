@@ -10,12 +10,12 @@
 <body>
 
 
-<div class="user-name">
+<!-- <div class="user-name">
   <form class="login-form" action="">
     <h3>Username</h3>
     <input class="login-input form-control" id="log-input" autocomplete="off" />
   </form>
-</div>
+</div> -->
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -134,14 +134,37 @@
 
         <div id="synth-controls">
 
-          <canvas nx="meter" id=""></canvas>
-          <canvas nx="dial" id=""></canvas>          
-          <canvas nx="dial" id=""></canvas>
-          <canvas nx="dial" id=""></canvas>
-          <canvas nx="dial" id=""></canvas>
-          <canvas nx="dial" id=""></canvas>
-          <canvas nx="dial" id=""></canvas>
-          <canvas nx="dial" id=""></canvas>
+         
+          
+          <div class="col-md-2">
+            <canvas nx="dial" id=""></canvas>
+            <p class="labels">Vol</p>
+          </div>   
+
+          <div class="col-md-2">                   
+            <canvas nx="meter" id=""></canvas>
+          </div>   
+
+          <div class="col-md-2">
+            <canvas nx="dial" id=""></canvas>
+            <p class="labels">Frequency</p>
+          </div>  
+
+          <div class="col-md-2">
+            <canvas nx="dial" id=""></canvas>
+            <p class="labels">Detune</p>
+          </div>  
+
+          <div class="col-md-2">
+            <canvas class="dial" nx="dial" id=""></canvas>
+            <p class="labels">Attack</p>
+          </div>  
+
+          <div class="col-md-2">
+            <canvas nx="dial" id=""></canvas>
+            <p class="labels">Sustain</p>
+          </div>
+
         </div>
 
       </div>
