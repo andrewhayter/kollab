@@ -4,25 +4,9 @@ var gainNode = context.createGain();
 var biquadFilter = context.createBiquadFilter();
 
 var now = context.currentTime;
-// var envelope = ADSR(context);
 
 gainNode.connect(biquadFilter);
 biquadFilter.connect(context.destination);
-
-// envelope.connect(context.destination)
-// gainNode.gain.value = 0;
-// envelope.attack = 0.01; // seconds
-// envelope.decay = 0.4; // seconds
-// envelope.sustain = 0.6; // multiply gain.gain.value
-// envelope.release = 0.4; // seconds
-
-// envelope.value.value = 2
-
-// envelope.start(context.currentTime)
-// oscillator.start(context.currentTime)
-
-// var stopAt = envelope.stop(context.currentTime + 1)
-// oscillator.stop(stopAt)
 
 function wireUpOnChange(id, node, prop, noValue) {
     $(id).on('change', function() {
@@ -30,9 +14,9 @@ function wireUpOnChange(id, node, prop, noValue) {
             node[prop] = this.value;
         } else {
             node[prop].value = this.value;
-        };
-    })
-};
+        }
+    });
+}
 
 wireUpOnChange('#gain-slider', gainNode, 'gain');
 wireUpOnChange('#bqType', biquadFilter, 'type', true);
@@ -65,7 +49,7 @@ function Key(noteName, frequency) {
         html: keyHTML,
         sound: keySound
     };
-};
+}
 
 function Sound(frequency, type) {
     this.osc = context.createOscillator();
@@ -80,7 +64,7 @@ function Sound(frequency, type) {
     }
     this.osc.type = type || 'sine';
     this.osc.start(0);
-};
+}
 
 Sound.prototype.play = function() {
     console.log(this);
@@ -97,6 +81,45 @@ Sound.prototype.stop = function() {
     this.gain.gain.linearRampToValueAtTime(0, now + Number($('#attack').val()));
 
 };
+
+Envelope = (function(context) {
+  function Envelope() {
+    this.attackTime = 0.1;
+    this.releaseTime = 0.1;
+  }
+
+  Envelope.prototype.setAttack = function(attack) {
+    this.attackTime = attack;
+  };
+
+  Envelope.prototype.setRelease = function(release) {
+    this.releaseTime = release;
+  };
+
+  Envelope.prototype.setSustain = function(sustain) {
+    this.sustain = sustain;
+  };
+
+  Envelope.prototype.trigger = function(start, end) {
+    var now = context.currentTime;
+    this.param.cancelScheduledValues(now);
+    this.param.setValueAtTime(start, end);
+    this.param.linearRampToValueAtTime(end, now + this.attackTime);
+
+    this.start = start;
+    this.end = end;
+
+    if(this.sustain !== 1) {
+      this.param.linearRampToValueAtTime(start, now + this.attackTime + this.releaseTime);
+    }
+  };
+
+  Envelope.prototype.connect = function(param) {
+    this.param = param;
+  };
+  return Envelope;
+
+})(context);
 
 function keyboard(notes, containerId) {
     var sortedKeys = [];
@@ -148,7 +171,7 @@ function keyboard(notes, containerId) {
     window.addEventListener('keydown' , function(event){
         if (!$('#m').is(':focus')) {
             socket.emit('play note', event.keyCode);
-        };
+        }
     });
 
     socket.on('play note', function(event){
@@ -171,10 +194,11 @@ function keyboard(notes, containerId) {
         // console.log(event);
         endNote(event);
     });
-};
+}
 
 window.addEventListener('load', function() {
     keyboard(keyboardNotes, 'keyboard');
 });
+
 })();
 
