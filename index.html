@@ -8,6 +8,14 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+
+<!-- <div class="user-name">
+  <form class="login-form" action="">
+    <h3>Username</h3>
+    <input class="login-input form-control" id="log-input" autocomplete="off" />
+  </form>
+</div> -->
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -38,19 +46,59 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-offset-2 col-sm-6">
-        <div id="controls">
+      <div id="controls">
+
+        <div class="col-md-offset-1 col-md-1">                   
           <canvas nx="toggle" id="onOff"></canvas>
-          <canvas nx="dial" id="amp"></canvas>
-          <canvas nx="meter" id="volumeMeter"></canvas>
-          <canvas nx="number" id="bpm"></canvas>
-          <canvas nx="dial" id="kickPitch"></canvas>
-          <canvas nx="dial" id="snarePitch"></canvas>
-          <canvas nx="dial" id="hihatPitch"></canvas>
-          <canvas nx="dial" id="kickVol"></canvas>
-          <canvas nx="dial" id="snareVol"></canvas>
-          <canvas nx="dial" id="hihatVol"></canvas>
         </div>
+
+        <div class="col-md-0">          
+          <canvas nx="dial" id="amp"></canvas>
+          <p class="labels">Master Vol</p>
+        </div>
+
+        <div class="col-md-0">          
+          <canvas nx="meter" id="volumeMeter"></canvas>
+        </div>
+
+        <div class="col-md-1">                   
+          <canvas nx="number" id="bpm"></canvas>
+          <p class="labels">BPM</p>
+        </div>
+        
+        <p class="seq-type">Kick</p>
+        <div class="col-md-1">        
+          <canvas nx="dial" id="kickPitch"></canvas>
+          <p class="labels">Pitch</p>
+        </div>
+
+        <div class="col-md-1">
+          <canvas nx="dial" id="kickVol"></canvas>
+          <p class="labels">Vol</p>
+        </div>
+
+        <p class="seq-type">Snare</p>
+        <div class="col-md-1">
+          <canvas nx="dial" id="snarePitch"></canvas>
+          <p class="labels">Pitch</p>
+        </div>
+
+         <div class="col-md-1">
+          <canvas nx="dial" id="snareVol"></canvas>
+          <p class="labels">Vol</p>
+        </div>
+
+        <p class="seq-type">Hihat</p>
+        <div class="col-md-1">
+          <canvas nx="dial" id="hihatPitch"></canvas>
+          <p class="labels">Pitch</p>
+        </div>
+
+        <div class="col-md-1">
+          <canvas nx="dial" id="hihatVol"></canvas>
+          <p class="labels">Vol</p>
+        </div>
+
       </div>
     </div>
 
@@ -84,7 +132,8 @@
             <option value="sawtooth">Sawtooth</option>
           </select>
 
-        <div id="controls">         
+      <!--   <div id="controls">
+
           <canvas nx="meter" id=""></canvas>
           <canvas nx="dial" id=""></canvas>          
           <canvas nx="dial" id=""></canvas>
@@ -93,56 +142,12 @@
           <canvas nx="dial" id=""></canvas>
           <canvas nx="dial" id=""></canvas>
           <canvas nx="dial" id=""></canvas>
-        </div>
+        </div> -->
 
       </div>
     </div>
-<<<<<<< HEAD
-  </div>
   
-  <select name="soundType" id="soundType">
-    <option value="triangle" selected>Triangle</option>
-    <option value="sine">Sine</option>
-    <option value="square">Square</option>
-    <option value="sawtooth">Sawtooth</option>
-  </select>
-
-  <label>Volume</label>
-  <input class="form-control" id="gain-slider" min="0" max="5" value="2.5" step="0.1" type="range" autocomplete="off" >
-  <label>BiquadFilter</label><br >
-
-  <select name="bqType" id="bqType">
-    <option value="lowpass" selected>Lowpass</option>
-    <option value="highpass">Highpass</option>
-    <option value="bandpass">Bandpass</option>
-    <option value="lowshelf">Lowshelf</option>
-    <option value="highshelf">Highshelf</option>
-    <option value="peaking">Peaking</option>
-    <option value="notch">Notch</option>
-    <option value="allpass">Allpass</option>
-  </select><br >
-
-  <span>Frequency</span>
-  <input class="form-control" id="bq-frequency-slider" min="0" max="750" value="375" step="10" type="range" autocomplete="off" >
-  <span>Gain</span>
-  <input class="form-control" id="bq-gain-slider" min="0" max="50" value="25" step="5" type="range" autocomplete="off" >
-  <span>Detune</span>
-  <input class="form-control" id="bq-detune-slider" min="0" max="500" value="250" step="10" type="range" autocomplete="off" >
-  <span>Attack?</span>
-  <input class="form-control" id="attack" min="0.1" max="0.6" value="0.2" step="0.05" type="range" autocomplete="off" >
-
-  <div id="keyboard">
-  </div>
-=======
->>>>>>> 90deb2f88cedcffff4283c66c2e76cf9156f1ced
-
-    <div class="row">
-        <div class="cold-sm-offset-0 col-sm-12" id="keyboard">
-        </div>
-    </div>
-
-  
-      <label>Volume</label>
+  <!--     <label>Volume</label>
       <input class="form-control" id="gain-slider" min="0" max="5" value="2.5" step="0.1" type="range" autocomplete="off" >
       
 
@@ -157,7 +162,7 @@
       <span>Attack?</span>
       <input class="form-control" id="attack" min="0.1" max="0.6" value="0.2" step="0.05" type="range" autocomplete="off" >
 
-
+ -->
   
 
   </div>

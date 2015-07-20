@@ -6,9 +6,11 @@ $('form').submit(function(){
   return false;
 });
 
-socket.on('chat message', function(msg){
-  if (msg != '') {
-    $('#messages').append($('<li>').text(msg).css("border-radius","10px"));
+
+socket.on('chat message', function(data){
+  if (data.message != '') {
+    $('#messages').append($('<li>').text(data.username + ": " + data.message).css("border-radius","10px"));
+    console.log(data.message);
   };
 });
 
@@ -18,5 +20,16 @@ $('.submit-button').click(function(){
   $('#messages').scrollTop( el.scrollHeight );
 });
 
+$('.login-input').focus();
+
+$('.login-form').submit(function(username){
+  socket.emit('add user', $('#log-input').val());
+  $('.user-name').fadeOut(1500);
+  return false;
+});
+
+socket.on('user joined', function (data) {
+  $('#messages').append($('<li>').text(data.username + " has joined").css("background","none").css("font-style", "italic"));
+});
 
 
