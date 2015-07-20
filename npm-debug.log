@@ -1,0 +1,137 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/andrewhayter/.nvm/v0.10.33/bin/node',
+1 verbose cli   '/Users/andrewhayter/.nvm/v0.10.33/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'requirejs' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json Kollab@0.0.1 No repository field.
+5 warn package.json Kollab@0.0.1 No README data
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'requirejs', null ]
+8 verbose cache add name=undefined spec="requirejs" args=["requirejs",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'requirejs',
+9 verbose parsed url   path: 'requirejs',
+9 verbose parsed url   href: 'requirejs' }
+10 silly lockFile f2b16c35-requirejs requirejs
+11 verbose lock requirejs /Users/andrewhayter/.npm/f2b16c35-requirejs.lock
+12 silly lockFile f2b16c35-requirejs requirejs
+13 silly lockFile f2b16c35-requirejs requirejs
+14 verbose addNamed [ 'requirejs', '' ]
+15 verbose addNamed [ null, '*' ]
+16 silly lockFile e9b02655-requirejs requirejs@
+17 verbose lock requirejs@ /Users/andrewhayter/.npm/e9b02655-requirejs.lock
+18 silly addNameRange { name: 'requirejs', range: '*', hasData: false }
+19 verbose request where is /requirejs
+20 verbose request registry https://registry.npmjs.org/
+21 verbose request id 5b04a10b220abd2e
+22 verbose url raw /requirejs
+23 verbose url resolving [ 'https://registry.npmjs.org/', './requirejs' ]
+24 verbose url resolved https://registry.npmjs.org/requirejs
+25 verbose request where is https://registry.npmjs.org/requirejs
+26 info trying registry request attempt 1 at 13:38:37
+27 verbose etag "ANEYZ8CMJ58040C5V6Y5KSVSJ"
+28 http GET https://registry.npmjs.org/requirejs
+29 http 200 https://registry.npmjs.org/requirejs
+30 silly registry.get cb [ 200,
+30 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+30 silly registry.get     etag: '"6Y0AR3IXYFAXD01KDU9PXKAFN"',
+30 silly registry.get     'content-type': 'application/json',
+30 silly registry.get     'cache-control': 'max-age=60',
+30 silly registry.get     'content-length': '40391',
+30 silly registry.get     'accept-ranges': 'bytes',
+30 silly registry.get     date: 'Fri, 17 Jul 2015 20:38:27 GMT',
+30 silly registry.get     via: '1.1 varnish',
+30 silly registry.get     age: '3',
+30 silly registry.get     connection: 'keep-alive',
+30 silly registry.get     'x-served-by': 'cache-lax1422-LAX',
+30 silly registry.get     'x-cache': 'HIT',
+30 silly registry.get     'x-cache-hits': '1',
+30 silly registry.get     'x-timer': 'S1437165507.225121,VS0,VE0',
+30 silly registry.get     vary: 'Accept' } ]
+31 silly addNameRange number 2 { name: 'requirejs', range: '*', hasData: true }
+32 silly addNameRange versions [ 'requirejs',
+32 silly addNameRange   [ '0.26.0',
+32 silly addNameRange     '0.27.0',
+32 silly addNameRange     '0.27.1',
+32 silly addNameRange     '1.0.0',
+32 silly addNameRange     '1.0.1',
+32 silly addNameRange     '1.0.2',
+32 silly addNameRange     '1.0.3',
+32 silly addNameRange     '1.0.4',
+32 silly addNameRange     '1.0.5',
+32 silly addNameRange     '1.0.6',
+32 silly addNameRange     '1.0.7',
+32 silly addNameRange     '1.0.8',
+32 silly addNameRange     '2.0.0',
+32 silly addNameRange     '2.0.1',
+32 silly addNameRange     '2.0.2',
+32 silly addNameRange     '2.0.3',
+32 silly addNameRange     '2.0.4',
+32 silly addNameRange     '2.0.5',
+32 silly addNameRange     '2.0.6',
+32 silly addNameRange     '2.1.0',
+32 silly addNameRange     '2.1.1',
+32 silly addNameRange     '2.1.2',
+32 silly addNameRange     '2.1.3',
+32 silly addNameRange     '2.1.4',
+32 silly addNameRange     '2.1.5',
+32 silly addNameRange     '2.1.6',
+32 silly addNameRange     '2.1.7',
+32 silly addNameRange     '2.1.8',
+32 silly addNameRange     '2.1.9',
+32 silly addNameRange     '2.1.10',
+32 silly addNameRange     '2.1.11',
+32 silly addNameRange     '2.1.12',
+32 silly addNameRange     '2.1.13',
+32 silly addNameRange     '2.1.14',
+32 silly addNameRange     '2.1.15',
+32 silly addNameRange     '2.1.16',
+32 silly addNameRange     '2.1.17',
+32 silly addNameRange     '2.1.18',
+32 silly addNameRange     '2.1.19' ] ]
+33 verbose addNamed [ 'requirejs', '2.1.19' ]
+34 verbose addNamed [ '2.1.19', '2.1.19' ]
+35 silly lockFile b83f9464-requirejs-2-1-19 requirejs@2.1.19
+36 verbose lock requirejs@2.1.19 /Users/andrewhayter/.npm/b83f9464-requirejs-2-1-19.lock
+37 silly lockFile f02326db-g-requirejs-requirejs-2-1-19-tgz https://registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz
+38 verbose lock https://registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz /Users/andrewhayter/.npm/f02326db-g-requirejs-requirejs-2-1-19-tgz.lock
+39 verbose addRemoteTarball [ 'https://registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz',
+39 verbose addRemoteTarball   'bad50434d2d0612dc7770eea1a2e0cf87542a0f5' ]
+40 info retry fetch attempt 1 at 13:38:40
+41 verbose fetch to= /var/folders/ss/0snktld17031qybxq6r5vcs80000gn/T/npm-65642-RS1U7oI1/registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz
+42 http GET https://registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz
+43 http 200 https://registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz
+44 silly lockFile f02326db-g-requirejs-requirejs-2-1-19-tgz https://registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz
+45 silly lockFile f02326db-g-requirejs-requirejs-2-1-19-tgz https://registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz
+46 silly lockFile b83f9464-requirejs-2-1-19 requirejs@2.1.19
+47 silly lockFile b83f9464-requirejs-2-1-19 requirejs@2.1.19
+48 silly lockFile e9b02655-requirejs requirejs@
+49 silly lockFile e9b02655-requirejs requirejs@
+50 error Error: shasum check failed for /var/folders/ss/0snktld17031qybxq6r5vcs80000gn/T/npm-65642-RS1U7oI1/registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz
+50 error Expected: bad50434d2d0612dc7770eea1a2e0cf87542a0f5
+50 error Actual:   3addb7625fcb72ae2e3702d3ae7815b57531ee17
+50 error From:     https://registry.npmjs.org/requirejs/-/requirejs-2.1.19.tgz
+50 error     at /Users/andrewhayter/.nvm/v0.10.33/lib/node_modules/npm/node_modules/sha/index.js:38:8
+50 error     at ReadStream.<anonymous> (/Users/andrewhayter/.nvm/v0.10.33/lib/node_modules/npm/node_modules/sha/index.js:85:7)
+50 error     at ReadStream.emit (events.js:117:20)
+50 error     at _stream_readable.js:943:16
+50 error     at process._tickCallback (node.js:419:13)
+51 error If you need help, you may report this *entire* log,
+51 error including the npm and node versions, at:
+51 error     <http://github.com/npm/npm/issues>
+52 error System Darwin 14.4.0
+53 error command "/Users/andrewhayter/.nvm/v0.10.33/bin/node" "/Users/andrewhayter/.nvm/v0.10.33/bin/npm" "install" "requirejs"
+54 error cwd /Users/andrewhayter/lighthouse/final_project
+55 error node -v v0.10.33
+56 error npm -v 1.4.28
+57 verbose exit [ 1, true ]
