@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <link href='http://fonts.googleapis.com/css?family=Rambla' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -170,7 +172,7 @@
       </div>
     </div>
   
-      <label>Volume</label>
+<!--       <label>Volume</label>
       <input class="form-control" id="gain-slider" min="0" max="5" value="2.5" step="0.1" type="range" autocomplete="off" >
       
 
@@ -184,11 +186,15 @@
       <input class="form-control" id="bq-detune-slider" min="0" max="500" value="250" step="10" type="range" autocomplete="off" >
       <span>Attack?</span>
       <input class="form-control" id="attack" min="0.1" max="0.6" value="0.2" step="0.05" type="range" autocomplete="off" >
-
+ -->
 
     <div class="row">
-        <div class="cold-sm-offset-0 col-sm-12" id="keyboard">
+        <div class="col-sm-offset-0 " id="keyboard">
         </div>
+        <div class="col-sm-2 box1"></div>
+        <div class="col-sm-2 box2"></div>
+        <div class="col-sm-2 box3"></div>
+        <div class="col-sm-2 box4"></div>
     </div>
   
 
@@ -196,9 +202,11 @@
 
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="js/sockets.js"></script>
   <script src="js/nexusUI.js"></script>
   <script src="js/oscillator2.js"></script>
   <script src="js/sequencer.js"></script>
-  <script src="js/sockets.js"></script>
+  <script src="js/tunepad.js"></script>
+  
 </body>
 </html>

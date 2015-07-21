@@ -43,6 +43,8 @@ io.on('connection', function(socket){
 
   socket.on('seq play', function(data){
     io.emit('seq play', data);
+    console.log(data);
+    console.log(data.list);
   })
 
   socket.on('bpm value', function(tempo){
@@ -83,6 +85,11 @@ io.on('connection', function(socket){
   socket.on('master gain', function(gain){
     io.emit('master gain', gain);
     console.log("master gain server " + gain);
+  })
+
+  socket.on('box', function(event){
+    io.emit('box', event);
+    console.log("box server " + event);
   })
 
   socket.on('add user', function(username){

@@ -11,7 +11,7 @@ $('.chat-form').submit(function(msg){
 
 socket.on('chat message', function(data){
   if (data.message != '') {
-    $('#messages').append($('<li>').text(data.username + ": " + data.message).css("border-radius","10px"));
+    $('#messages').append($('<li>').text(data.username + ": " + data.message).css("border-radius","5px"));
     console.log(data.message);
   };
 });

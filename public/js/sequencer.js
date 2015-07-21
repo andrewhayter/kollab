@@ -210,15 +210,23 @@ function soundsLoaded() {
 
   pattern.on('*', function(data){
     socket.emit('seq play', data);
+    console.log("array" + data);
   });
+
 
   //data coming through but squares are not being activated on matrix
   socket.on('seq play', function(data){
+
+    console.log(data.list);
+    
+    pattern.draw();
     var soundNames = Object.keys(sounds);
     if(data.list) {
+
     //Sequencer event
     data.list.map(function(state, idx) {
       if(!state) { return; }
+      // console.log('state' + state);
       var sound = sounds[soundNames[idx]];
       play(sound, soundNames[idx]);
     });
@@ -229,16 +237,15 @@ function soundsLoaded() {
 
 
 
-  onOff.on('*', function(data) { 
+  onOff.on('*', function(data) {
     socket.emit('seq run', data);
-    console.log(data);
   });
 
   socket.on('seq run', function(data){
     if (data.value == 1) {
       pattern.sequence(bpmTempo);      
     } else {
-      pattern.stop();      
+      pattern.stop();    
     }
   })
 
