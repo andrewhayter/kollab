@@ -55,6 +55,35 @@ io.on('connection', function(socket){
     console.log("gain server " +gain);
   })
 
+  socket.on('snare gain', function(gain){
+    io.emit('snare gain', gain);
+    console.log("snare gain server " +gain);
+  })
+
+  socket.on('kick gain', function(gain){
+    io.emit('kick gain', gain);
+    console.log("kick gain server " +gain);
+  })
+
+  socket.on('hihat pitch', function(pitch){
+    io.emit('hihat pitch', pitch);
+    console.log("hihat pitch server " +pitch);
+  })
+
+  socket.on('snare pitch', function(pitch){
+    io.emit('snare pitch', pitch);
+    console.log("snare pitch server " +pitch);
+  })
+
+  socket.on('kick pitch', function(pitch){
+    io.emit('kick pitch', pitch);
+    console.log("kick pitch server " +pitch);
+  })
+
+  socket.on('master gain', function(gain){
+    io.emit('master gain', gain);
+    console.log("master gain server " + gain);
+  })
 
   socket.on('add user', function(username){
    socket.username = username;
