@@ -105,10 +105,10 @@ body {
   box-shadow: -3px 5px 5px #888888;
   border-radius: 5px;
   margin: 0;
-  padding: 0;
+  padding-right: 0;
   height: 525px;
   overflow: auto; 
-  width: 90%;
+  width: 300px;
 }
 
 #messages li {
