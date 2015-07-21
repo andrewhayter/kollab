@@ -50,8 +50,7 @@ var soundNames = [
 
 // Nexus UI Stuff
 
-function soundsLoaded()
-{
+function soundsLoaded() {
   nx.colorize("accent", "#00DDCC");
   nx.colorize("border", "#000000");
 
@@ -64,8 +63,7 @@ function soundsLoaded()
 
   amp.val.value = 0.8;
   amp.init();
-  amp.on('value', function(gain)
-  {
+  amp.on('value', function(gain) {
     masterVolume.gain.value = gain;
   });
 
@@ -78,24 +76,28 @@ function soundsLoaded()
 
   kickVol.val.value = 0.8;
   kickVol.init();
-  kickVol.on('value', function(gain)
-  {
+  kickVol.on('value', function(gain) {
     kickGain.gain.value = gain;
   });
 
   snareVol.val.value = 0.8;
   snareVol.init();
-  snareVol.on('value', function(gain)
-  {
+  snareVol.on('value', function(gain) {
     snareGain.gain.value = gain;
   });
 
+
   hihatVol.val.value = 0.8;
-  hihatVol.init();
-  hihatVol.on('value', function(gain)
-  {
+  hihatVol.on('value', function(gain) {
+    socket.emit('hihat gain', gain);
+  });
+
+  socket.on('hihat gain', function(gain){
+    
+    hihatVol.init();
     hihatGain.gain.value = gain;
   });
+  
 
   volumeMeter.setup(audioContext, masterVolume);
   bpm.min = 50;
@@ -103,18 +105,31 @@ function soundsLoaded()
   bpm.decimalPlaces = 0;
   bpm.rate = 2;
 
+
   bpm.set({
     value: parseInt(bpmTempo)
   });
+  //socket data coming through but not visually changing
   bpm.on('value', function(tempo) {
-    bpmTempo = tempo;
-    pattern.sequence(bpmTempo);
+    console.log("initial tempo" + tempo);
+    socket.emit('bpm value', tempo);
   });
-  bpm.init();
-  bpm.draw();
 
-  function play(buffer, kind)
-  {
+  socket.on('bpm value', function(tempo) {
+    bpmTempo = tempo;
+ 
+    pattern.sequence(bpmTempo);
+    bpm.init();
+    bpm.draw();
+
+    bpm.set({
+      value: parseInt(bpmTempo)
+    });
+
+
+  });
+
+  function play(buffer, kind) {
     var source = audioContext.createBufferSource();
     source.buffer = buffer;
     source.playbackRate.value = 0.5 + window[kind + "Pitch"].val.value;
@@ -122,33 +137,33 @@ function soundsLoaded()
     source.start();
   }
 
-  pattern.on('*', function(data)
-  {
+
+  pattern.on('*', function(data){
+    socket.emit('seq play', data);
+  });
+
+  //data coming through but squares are not being activated on matrix
+  socket.on('seq play', function(data){
     var soundNames = Object.keys(sounds);
-    if(data.list)
-    {
+    if(data.list) {
     //Sequencer event
-    data.list.map(function(state, idx)
-    {
+    data.list.map(function(state, idx) {
       if(!state) { return; }
       var sound = sounds[soundNames[idx]];
       play(sound, soundNames[idx]);
     });
-  }
-  else
-  {
-    //Click event
-  }
-});
-
-
-
-//mission add on off to socket
-  onOff.on('*', function(data) { 
-    socket.emit('pattern play', data);
+    } else {
+      //Click event
+    }
   });
 
-  socket.on('pattern play', function(data){
+
+
+  onOff.on('*', function(data) { 
+    socket.emit('seq run', data);
+  });
+
+  socket.on('seq run', function(data){
     if (data.value == 1) {
       pattern.sequence(bpmTempo);
     } else {

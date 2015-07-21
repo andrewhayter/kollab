@@ -37,9 +37,24 @@ io.on('connection', function(socket){
     console.log("hello");
   });
 
-  socket.on('pattern play', function(data){
-    io.emit('pattern play', data);
+  socket.on('seq run', function(data){
+    io.emit('seq run', data);
   })
+
+  socket.on('seq play', function(data){
+    io.emit('seq play', data);
+  })
+
+  socket.on('bpm value', function(tempo){
+    io.emit('bpm value', tempo);
+    console.log("tempo server" +tempo);
+  })
+
+  socket.on('hihat gain', function(gain){
+    io.emit('hihat gain', gain);
+    console.log("gain server " +gain);
+  })
+
 
   socket.on('add user', function(username){
    socket.username = username;
