@@ -105,7 +105,6 @@ function soundsLoaded() {
 
   snarePitch.init();
 
-  //
   hihatPitch.val.value = 0.5;
 
   hihatPitch.on('value', function(pitch) {
@@ -215,18 +214,16 @@ function soundsLoaded() {
 
 
   //data coming through but squares are not being activated on matrix
-  socket.on('seq play', function(data){
+  //vasilli suggest making a function that packs everything together then sends the state to avoid latency issues
+  //he also suggests sending the state of the matrix first then sending the grouped function to play
 
-    console.log(data.list);
-    
-    pattern.draw();
+  socket.on('seq play', function(data){
     var soundNames = Object.keys(sounds);
     if(data.list) {
-
     //Sequencer event
+    
     data.list.map(function(state, idx) {
       if(!state) { return; }
-      // console.log('state' + state);
       var sound = sounds[soundNames[idx]];
       play(sound, soundNames[idx]);
     });
