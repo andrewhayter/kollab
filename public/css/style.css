@@ -155,8 +155,7 @@ input[type=range][orient=vertical]
     
 }
 
-/* keyboard */
-
+  
 select {
   font-size: 1em;
   background-color: white;
@@ -208,7 +207,7 @@ select {
 
 .key {
   border-radius: 2px;
-  margin: 5px;
+  margin: 4px;
   width: 7.5%;
   padding: 3.5em 0;
   text-align: center;
@@ -217,7 +216,7 @@ select {
   /*transition: margin 150ms ease-in-out;*/
 }
 
-.box1, .box2, .box3, .box4 {
+.box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8 {
   width:40px;
   height: 40px;
   margin:5px;
