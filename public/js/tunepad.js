@@ -17,30 +17,30 @@
   }
 
       var samples = {
-        84: { name: '.box1' },
-        89: { name: '.box2' },
-        85: { name: '.box3' },
-        73: { name: '.box4' },
-        79: { name: '.box5' },
-        80: { name: '.box6' },
-        219: { name: '.box7' },
-        221: { name: '.box8' },
+        84: { boxName: '.box1' },
+        89: { boxName: '.box2' },
+        85: { boxName: '.box3' },
+        73: { boxName: '.box4' },
+        79: { boxName: '.box5' },
+        80: { boxName: '.box6' },
+        219: { boxName: '.box7' },
+        221: { boxName: '.box8' },
     };
 
   var soundNames = ['scream'];
 //
   socket.on('box', function(event){
-      switch (event) {
-        for (var i; i < samples.length; i++) {
-        case event:
+    for (var i; i < samples.length; i++) {
+      switch (event) {        
+        case i.key:
           var playSound = context.createBufferSource();
           playSound.buffer = samples[name];
           playSound.connect(masterVolume);
 
-          $('.box4').addClass('pad-down');
+          $(samples.boxName).addClass('pad-down');
             playSound.start(0);
           setTimeout(function(){
-            $('.box4').removeClass('pad-down');      
+            $(samples.boxName).removeClass('pad-down');      
           }, 300);
         break;
       }
