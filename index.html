@@ -213,6 +213,20 @@
 
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    var context = new (AudioContext || webkitAudioContext)();
+    var masterVolume = context.createGain();
+
+    // var compressor = context.createDynamicsCompressor();
+    // compressor.threshold.value = -50;
+    // compressor.knee.value = 40;
+    // compressor.ratio.value = 12;
+    // compressor.reduction.value = -20;
+    // compressor.attack.value = 0;
+    // compressor.release.value = 0.25;
+    masterVolume.connect(context.destination);
+    // compressor.connect(context.destination);
+  </script>
   <script src="js/sockets.js"></script>
   <script src="js/nexusUI.js"></script>
   <script src="js/oscillator2.js"></script>

@@ -1,29 +1,22 @@
 /* jshint quotmark: false, browser: true, jquery: true, devel: true */
 /* globals nx, pattern, toggle1, amp */
 "use strict";
-var Context = window.AudioContext || window.webkitAudioContext;
-var audioContext = new Context();
 
-var masterVolume = audioContext.createGain();
-var compressor = audioContext.createDynamicsCompressor();
+var kickGain = context.createGain();
+var snareGain = context.createGain();
+var hihatGain = context.createGain();
 
-var kickGain = audioContext.createGain();
-var snareGain = audioContext.createGain();
-var hihatGain = audioContext.createGain();
+// var lfo = context.createOscillator();
+// lfo.frequency.value = 1;
+// lfo.connect(masterVolume.gain);
+// lfo.start();
 
-compressor.threshold.value = -50;
-compressor.knee.value = 40;
-compressor.ratio.value = 12;
-compressor.reduction.value = -20;
-compressor.attack.value = 0;
-compressor.release.value = 0.25;
 
 kickGain.connect(masterVolume);
 snareGain.connect(masterVolume);
 hihatGain.connect(masterVolume);
 
-masterVolume.connect(compressor);
-compressor.connect(audioContext.destination);
+
 
 var bpmTempo = 240;
 var sounds = {};
@@ -33,7 +26,7 @@ function loadSound(name, done) {
   request.open('GET', 'samples/dilla/' + name + '.wav', true);
   request.responseType = 'arraybuffer';
   request.onload = function soundWasLoaded() {
-    audioContext.decodeAudioData(request.response, function(buffer) {
+    context.decodeAudioData(request.response, function(buffer) {
       sounds[name] = buffer;
       done();
     });
@@ -167,7 +160,7 @@ function soundsLoaded() {
   hihatVol.init();
   
 
-  volumeMeter.setup(audioContext, masterVolume);
+  volumeMeter.setup(context, masterVolume);
   bpm.min = 50;
   bpm.max = 500;
   bpm.decimalPlaces = 0;
@@ -187,19 +180,15 @@ function soundsLoaded() {
 
   socket.on('bpm value', function(tempo) {
     bpmTempo = tempo;
- 
-    pattern.sequence(bpmTempo);
-    bpm.init();
+    pattern.bpm = tempo;
+    bpm.val.value = tempo;
     bpm.draw();
-
-    bpm.set({
-      value: parseInt(bpmTempo)
-    });
   });
 
 
-  function play(buffer, kind) {
-    var source = audioContext.createBufferSource();
+  function play(buffer, kind)
+  {
+    var source = context.createBufferSource();
     source.buffer = buffer;
     source.playbackRate.value = 0.5 + window[kind + "Pitch"].val.value;
     source.connect(window[kind + "Gain"]);
@@ -207,10 +196,30 @@ function soundsLoaded() {
   }
 
 
-  pattern.on('*', function(data){
-    socket.emit('seq play', data);
-    console.log("array" + data);
-    console.log(data.list);
+  pattern.on('*', function(data)
+  {
+    if(!data.list)
+    {
+      socket.emit('pattern', data);
+    }
+    else
+    {
+      //Play
+      data.list.map(function(state, idx)
+      {
+        if(!state) { return; }
+        var soundNames = Object.keys(sounds);
+        var sound = sounds[soundNames[idx]];
+        play(sound, soundNames[idx]);
+      });
+    }
+  });
+
+  socket.on('pattern', function(p)
+  {
+    // pattern.setCell(p.col, p.row, !!p.level); // This calls transmit, causing an infinite loop
+    pattern.matrix[p.col][p.row] = p.level;
+    pattern.draw();
   });
 
 
@@ -218,30 +227,17 @@ function soundsLoaded() {
   //vasilli suggest making a function that packs everything together then sends the state to avoid latency issues
   //he also suggests sending the state of the matrix first then sending the grouped function to play
 
-  socket.on('seq play', function(data){
-    var soundNames = Object.keys(sounds);
-    if(data.list) {
-    //Sequencer event
-    
-    data.list.map(function(state, idx) {
-      if(!state) { return; }
-      var sound = sounds[soundNames[idx]];
-      play(sound, soundNames[idx]);
-    });
-    } else {
-      //Click event
-    }
-  });
-
-
-
   onOff.on('*', function(data) {
     socket.emit('seq run', data);
   });
 
-  socket.on('seq run', function(data){
-    if (data.value == 1) {
-      pattern.sequence(bpmTempo);      
+  socket.on('seq run', function(data)
+  {
+    onOff.val.value = data.value;
+    onOff.draw();
+    if (data.value == 1)
+    {
+      pattern.sequence(bpmTempo);
     } else {
       pattern.stop();    
     }

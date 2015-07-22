@@ -1,13 +1,10 @@
 (function(){
-
-  var context2 = new AudioContext();
-
   var getSound = new XMLHttpRequest();
   getSound.open("GET", "samples/dilla/dot_matrix.wav", true);
   getSound.responseType = "arraybuffer";
 
   getSound.onload = function() {
-    context2.decodeAudioData(getSound.response, function(buffer){
+    context.decodeAudioData(getSound.response, function(buffer){
       printer = buffer;
     });
   }
@@ -20,7 +17,7 @@
   getSound2.responseType = "arraybuffer";
 
   getSound2.onload = function() {
-    context2.decodeAudioData(getSound2.response, function(buffer){
+    context.decodeAudioData(getSound2.response, function(buffer){
       scream = buffer;
     });
   }
@@ -33,7 +30,7 @@
   getSound3.responseType = "arraybuffer";
 
   getSound3.onload = function() {
-    context2.decodeAudioData(getSound3.response, function(buffer){
+    context.decodeAudioData(getSound3.response, function(buffer){
       zappy = buffer;
     });
   }
@@ -46,7 +43,7 @@
   getSound4.responseType = "arraybuffer";
 
   getSound4.onload = function() {
-    context2.decodeAudioData(getSound4.response, function(buffer){
+    context.decodeAudioData(getSound4.response, function(buffer){
       a_kick = buffer;
     });
   }
@@ -59,7 +56,7 @@
   getSound5.responseType = "arraybuffer";
 
   getSound5.onload = function() {
-    context2.decodeAudioData(getSound5.response, function(buffer){
+    context.decodeAudioData(getSound5.response, function(buffer){
       electro2 = buffer;
     });
   }
@@ -72,7 +69,7 @@
   getSound6.responseType = "arraybuffer";
 
   getSound6.onload = function() {
-    context2.decodeAudioData(getSound6.response, function(buffer){
+    context.decodeAudioData(getSound6.response, function(buffer){
       electro2 = buffer;
     });
   }
@@ -86,7 +83,7 @@
   getSound7.responseType = "arraybuffer";
 
   getSound7.onload = function() {
-    context2.decodeAudioData(getSound7.response, function(buffer){
+    context.decodeAudioData(getSound7.response, function(buffer){
       electro2 = buffer;
     });
   }
@@ -100,7 +97,7 @@
   getSound8.responseType = "arraybuffer";
 
   getSound8.onload = function() {
-    context2.decodeAudioData(getSound8.response, function(buffer){
+    context.decodeAudioData(getSound8.response, function(buffer){
       electro2 = buffer;
     });
   }
@@ -112,9 +109,9 @@
   socket.on('box', function(event){
     switch (event) {
       case 84:
-        var playSound = context2.createBufferSource();
+        var playSound = context.createBufferSource();
         playSound.buffer = printer;
-        playSound.connect(context2.destination);
+        playSound.connect(masterVolume);
         $('.box1').addClass('pad-down');
           playSound.start(0);
         setTimeout(function(){
@@ -122,9 +119,9 @@
         }, 300);
       break;
       case 89:
-        var playSound = context2.createBufferSource();
+        var playSound = context.createBufferSource();
         playSound.buffer = scream;
-        playSound.connect(context2.destination);
+        playSound.connect(masterVolume);
         $('.box2').addClass('pad-down');
           playSound.start(0);
         setTimeout(function(){
@@ -132,9 +129,9 @@
         }, 300);
       break;
       case 85:
-        var playSound = context2.createBufferSource();
+        var playSound = context.createBufferSource();
         playSound.buffer = zappy;
-        playSound.connect(context2.destination);
+        playSound.connect(masterVolume);
         $('.box3').addClass('pad-down');
           playSound.start(0);
         setTimeout(function(){
@@ -142,9 +139,9 @@
         }, 300);
       break;
       case 73:
-        var playSound = context2.createBufferSource();
+        var playSound = context.createBufferSource();
         playSound.buffer = a_kick;
-        playSound.connect(context2.destination);
+        playSound.connect(masterVolume);
         $('.box4').addClass('pad-down');
           playSound.start(0);
         setTimeout(function(){
@@ -152,9 +149,9 @@
         }, 300);
       break;
       case 79:
-        var playSound = context2.createBufferSource();
+        var playSound = context.createBufferSource();
         playSound.buffer = electro2;
-        playSound.connect(context2.destination);
+        playSound.connect(masterVolume);
         $('.box5').addClass('pad-down');
           playSound.start(0);
         setTimeout(function(){
@@ -162,9 +159,9 @@
         }, 300);
       break;
       case 80:
-        var playSound = context2.createBufferSource();
+        var playSound = context.createBufferSource();
         playSound.buffer = electro2;
-        playSound.connect(context2.destination);
+        playSound.connect(masterVolume);
         $('.box6').addClass('pad-down');
           playSound.start(0);
         setTimeout(function(){
@@ -172,9 +169,9 @@
         }, 300);
       break;
       case 219:
-        var playSound = context2.createBufferSource();
+        var playSound = context.createBufferSource();
         playSound.buffer = electro2;
-        playSound.connect(context2.destination);
+        playSound.connect(masterVolume);
         $('.box7').addClass('pad-down');
           playSound.start(0);
         setTimeout(function(){
@@ -182,9 +179,9 @@
         }, 300);
       break;
       case 221:
-        var playSound = context2.createBufferSource();
+        var playSound = context.createBufferSource();
         playSound.buffer = electro2;
-        playSound.connect(context2.destination);
+        playSound.connect(masterVolume);
         $('.box8').addClass('pad-down');
           playSound.start(0);
         setTimeout(function(){

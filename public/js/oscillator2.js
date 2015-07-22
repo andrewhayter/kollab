@@ -1,13 +1,11 @@
 (function() {
-
-    var context = new (AudioContext || webkitAudioContext)();
-    var gainNode = context.createGain();
+    // var gainNode = context.createGain();
     var biquadFilter = context.createBiquadFilter();
 
     var now = context.currentTime;
 
-    gainNode.connect(biquadFilter);
-    biquadFilter.connect(context.destination);
+    // gainNode.connect(biquadFilter);
+    biquadFilter.connect(masterVolume);
 
     function wireUpOnChange(id, node, prop, noValue) {
         $(id).on('change', function() {
@@ -22,7 +20,7 @@
         
     };
 
-    wireUpOnChange('#gain-slider', gainNode, 'gain');
+    // wireUpOnChange('#gain-slider', gainNode, 'gain');
     wireUpOnChange('#bqType', biquadFilter, 'type', true);
     wireUpOnChange('#bq-frequency-slider', biquadFilter, 'frequency');
     wireUpOnChange('#bq-gain-slider', biquadFilter, 'gain');
@@ -61,7 +59,7 @@
         this.gain = context.createGain();
         this.gain.gain.value = 0;
         this.osc.connect(this.gain);
-        this.gain.connect(gainNode);
+        this.gain.connect(biquadFilter);
         this.pressed = false;
 
         if(typeof frequency !== 'undefined') {

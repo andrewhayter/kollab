@@ -17,10 +17,10 @@ socket.on('chat message', function(data){
 });
 
 
-  var el = document.getElementById('messages');
-  $('.submit-button').click(function(){
-    $('#messages').scrollTop( el.scrollHeight );
-  });
+var el = document.getElementById('messages');
+$('.submit-button').click(function(){
+  $('#messages').scrollTop( el.scrollHeight );
+});
 
 $('.login-input').focus();
 

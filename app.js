@@ -87,6 +87,11 @@ io.on('connection', function(socket){
     console.log("master gain server " + gain);
   })
 
+  socket.on('pattern', function(p) {
+    io.emit('pattern', p);
+    console.log("Pattern change", p);
+  })
+
   socket.on('box', function(event){
     io.emit('box', event);
     console.log("box server " + event);
