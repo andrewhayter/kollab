@@ -32,7 +32,8 @@ $('.login-form').submit(function(username){
 });
 
 socket.on('user joined', function (data) {
-  $('#messages').append($('<li>').text(data.username + " has joined").css("background","none").css("font-style", "italic"));
+  var boldName = $(data.username).css("font-weight", "bold");
+  $('#messages').append($('<li>').text(boldName + " has joined").css("background","none").css("font-style", "italic"));
 
 });
 
