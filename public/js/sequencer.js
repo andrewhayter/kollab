@@ -48,8 +48,6 @@ var soundNames = [
 'kick', 'snare', 'hihat'
 ];
 
-// Nexus UI Stuff
-
 function soundsLoaded()
 {
   nx.colorize("accent", "#00DDCC");
@@ -162,8 +160,3 @@ function loadNextSound()
     soundsLoaded();
   }
 }
-
-nx.onload = function()
-{
-  loadNextSound();
-};

@@ -1,4 +1,4 @@
-(function() {
+function synth() {
 var context = new (AudioContext || webkitAudioContext)();
 var gainNode = context.createGain();
 var biquadFilter = context.createBiquadFilter();
@@ -8,21 +8,21 @@ var now = context.currentTime;
 gainNode.connect(biquadFilter);
 biquadFilter.connect(context.destination);
 
-function wireUpOnChange(id, node, prop, noValue) {
-    $(id).on('change', function() {
-        if(noValue) {
-            node[prop] = this.value;
-        } else {
-            node[prop].value = this.value;
-        }
-    });
-}
+// function wireUpOnChange(id, node, prop, noValue) {
+//     $(id).on('change', function() {
+//         if(noValue) {
+//             node[prop] = this.value;
+//         } else {
+//             node[prop].value = this.value;
+//         }
+//     });
+// }
 
-wireUpOnChange('#gain-slider', gainNode, 'gain');
-wireUpOnChange('#bqType', biquadFilter, 'type', true);
-wireUpOnChange('#bq-frequency-slider', biquadFilter, 'frequency');
-wireUpOnChange('#bq-gain-slider', biquadFilter, 'gain');
-wireUpOnChange('#bq-detune-slider', biquadFilter, 'detune');
+// wireUpOnChange('#gain-slider', gainNode, 'gain');
+// wireUpOnChange('#bqType', biquadFilter, 'type', true);
+// wireUpOnChange('#bq-frequency-slider', biquadFilter, 'frequency');
+// wireUpOnChange('#bq-gain-slider', biquadFilter, 'gain');
+// wireUpOnChange('#bq-detune-slider', biquadFilter, 'detune');
 
 var keyboardNotes = {
     65: { noteName: 'a', frequency: 261.6 },
@@ -42,7 +42,7 @@ function Key(noteName, frequency) {
     var keyHTML = document.createElement('div');
     var keySound = new Sound(frequency, 'sine');
 
-    keyHTML.className = 'key';
+    keyHTML.className = 'key col-sm-6';
     keyHTML.innerHTML = noteName + '<br>';
 
     return {
@@ -66,60 +66,23 @@ function Sound(frequency, type) {
     this.osc.start(0);
 }
 
+
 Sound.prototype.play = function() {
     console.log(this);
     if(!this.pressed) {
         this.pressed = true;
         // console.log("attack value " + $('#attack').val());
-        this.gain.gain.linearRampToValueAtTime(1, now + Number($('#attack').val()));
+        this.gain.gain.linearRampToValueAtTime(1, now);
+
     }
 };
 
 Sound.prototype.stop = function() {
     this.pressed = false;
     // console.log("attack value " + $('#attack').val());
-    this.gain.gain.linearRampToValueAtTime(0, now + Number($('#attack').val()));
+    this.gain.gain.linearRampToValueAtTime(0, now);
 
 };
-
-Envelope = (function(context) {
-  function Envelope() {
-    this.attackTime = 0.1;
-    this.releaseTime = 0.1;
-  }
-
-  Envelope.prototype.setAttack = function(attack) {
-    this.attackTime = attack;
-  };
-
-  Envelope.prototype.setRelease = function(release) {
-    this.releaseTime = release;
-  };
-
-  Envelope.prototype.setSustain = function(sustain) {
-    this.sustain = sustain;
-  };
-
-  Envelope.prototype.trigger = function(start, end) {
-    var now = context.currentTime;
-    this.param.cancelScheduledValues(now);
-    this.param.setValueAtTime(start, end);
-    this.param.linearRampToValueAtTime(end, now + this.attackTime);
-
-    this.start = start;
-    this.end = end;
-
-    if(this.sustain !== 1) {
-      this.param.linearRampToValueAtTime(start, now + this.attackTime + this.releaseTime);
-    }
-  };
-
-  Envelope.prototype.connect = function(param) {
-    this.param = param;
-  };
-  return Envelope;
-
-})(context);
 
 function keyboard(notes, containerId) {
     var sortedKeys = [];
@@ -147,7 +110,7 @@ function keyboard(notes, containerId) {
 
         if(typeof keyboardNotes[keyCode] !== 'undefined') {
             keyboardNotes[keyCode].key.sound.play();
-            keyboardNotes[keyCode].key.html.className = 'key playing';
+            keyboardNotes[keyCode].key.html.className = 'key playing col-sm-2';
         }
     };
 
@@ -156,8 +119,7 @@ function keyboard(notes, containerId) {
 
         if(typeof keyboardNotes[keyCode] !== 'undefined') {
             keyboardNotes[keyCode].key.sound.stop();
-
-            keyboardNotes[keyCode].key.html.className = 'key';
+            keyboardNotes[keyCode].key.html.className = 'key col-sm-2';
         }
     };
 
@@ -175,30 +137,24 @@ function keyboard(notes, containerId) {
     });
 
     socket.on('play note', function(event){
-        console.log("should play note");
-        console.log("play note " + event);
-        console.log(event);
         playNote(event);
     });
 
     window.addEventListener('keyup', function(event){
         socket.emit('end note', event.keyCode);
-        console.log(event.keyCode);
-        console.log("keydown " + event.keyCode);
     });
 
     socket.on('end note', function(event){
-        // console.log("should end note");
-        // console.log("end note " + event);
-        // console.log(endNote(event));
-        // console.log(event);
         endNote(event);
     });
 }
 
-window.addEventListener('load', function() {
     keyboard(keyboardNotes, 'keyboard');
+
+synthVol.val.value = 0.7;
+synthVol.init();
+synthVol.on('value', function(vol){
+  gainNode.gain.value = vol;
 });
 
-})();
-
+};

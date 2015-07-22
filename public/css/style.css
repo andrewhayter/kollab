@@ -3,64 +3,123 @@
   border:1px dashed black;
 }
 */
+
+
 body {
   font: 17px Helvetica, Arial;
-  background-color: #e0fffc;
+  background-color: #f7fffe;
 }
 
-#msg-board {
-  /*position: fixed;
-  float:right;*/  
-  width:400px;
-  height:300px;
-  overflow: auto;
-  background-color: red;
+.user-name {
+    position:fixed;
+    padding:0;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+
+    background: #00ddcc; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #00ddcc 24%, #59a8e5 83%); 
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(24%,#00ddcc), color-stop(83%,#59a8e5)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); 
+    background: -o-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #00ddcc 24%,#59a8e5 83%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #00ddcc 24%,#59a8e5 83%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ddcc', endColorstr='#59a8e5',GradientType=1 );   
+    
 }
 
-form {
-  background: #464b51;
-  padding: 3px;
-  position: fixed;
+
+.login-form {
+  padding: 2px;
   border-radius: 10px;
   bottom: 0;
-  width: 20%;
+  width: 19%;
+  text-align: center;
+  margin: auto;
+  margin-top:280px;
+  position: relative;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 
-form input {
+.login-input {
   border: 0;
   padding: 10px;
-  width: 50%;
+  width: 100%;
   border-radius: 20px;
   margin-right: .5%;
+  position: relative;
+  margin:auto;
+  font-size: 1em;
+  text-align: center
 }
 
-form button {
-  width: 60px;
-  background: #7c70a0;
+
+.chat-form {
+  background: #EEEEEE;
+  padding: 3px;
+  position: relative;
+  border-radius: 20px;
+  bottom: 0;
+  width: 100%;
+}
+
+.submit-button {
+  width: 35px;
+  background: #53B2A9;
   border-radius: 50%;
+}
+
+#m {
+  border: 0;
+  padding: 10px;
+  width: 80%;
+  display: inline;
+  margin-right: 5px;
+  border-radius: 20px;
+  /*margin-right: .5%;*/
+  /*position: relative;*/
+}
+
+#effects {
+  height:100px;
+  background-color: #00DDCC;
+  margin-bottom: 20px;
+}
+
+.message-board {
+  position: fixed;
+  z-index: 999;
 }
 
 #messages {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width:20%;
-  position:absolute;
-  height: 100%;
-  overflow: scroll; 
+  height: 525px;
+  overflow: auto; 
+  width: 90%;
 }
 
-
 #messages li {
+  position: inherit;
   padding: 5px 10px;
+  width: 100%;
 }
 
 #messages li:nth-child(odd) {
-  background: #96ffd3;
+  background: #00DDCC;
 }
-#messages li:nth-child(even) {
-  background: #f7f4a8;
 
+#messages li:nth-child(even) {
+  background: #EEEEEE;
+
+}
+
+.user-join {
+  background: none;
 }
 
 .musicboard {
@@ -87,6 +146,10 @@ form button {
   width:20%;
 }
 
+#attack {
+  width: 20%;
+}
+
 /* keyboard */
 
 select {
@@ -94,36 +157,70 @@ select {
   background-color: white;
 }
 
+#controls, #synth-controls {
+  display:-webkit-inline-box;
+  /*background-color: red;*/
+}
+
+.labels {
+  font-size: .7em;
+}
+
+.navbar {
+}
+
+.seq-type {
+  margin-top: 17px;
+  margin-left: 20px;
+}
+
+#controls {
+  display: -webkit-inline-box;
+}
+
+.labels {
+  font-size: .7em;
+  text-align: center;
+  margin-left: 10px;
+}
+
+
+.navbar {
+}
 
 #keyboard {
-  width: 80%;
-  float:left;
-  overflow: hidden;
+  margin-left:20%;
 }
 
 .key {
   border-radius: 2px;
-  color:#00DDCC;
-  background: #fff;
   margin: 0 0.5%;
   width: 2.5%;
   padding: 3.5em 0;
   text-align: center;
-  float: left;
   text-transform: uppercase;
-  transition: margin 150ms ease-in-out;
+  /*transition: margin 150ms ease-in-out;*/
 }
 
 .key:nth-child(even){
   background: #00DDCC;
-  height:1px;
+  height: 5px;
   color:white;
+}
+
+.key:nth-child(odd){
+  background: #EEEEEE;
+  /*margin-top: 15px;*/
+  color:#00DDCC;
 }
 
 .key.playing {
   background: #02ffe9;
-  margin-top: 2em;
+  color: white;
+  /*margin-top: 2em;*/
 }
+
+.
 
 
 
