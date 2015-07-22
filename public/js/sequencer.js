@@ -11,12 +11,9 @@ var hihatGain = context.createGain();
 // lfo.connect(masterVolume.gain);
 // lfo.start();
 
-
 kickGain.connect(masterVolume);
 snareGain.connect(masterVolume);
 hihatGain.connect(masterVolume);
-
-
 
 var bpmTempo = 240;
 var sounds = {};
@@ -158,7 +155,7 @@ function soundsLoaded() {
   });
 
   hihatVol.init();
-  
+
 
   volumeMeter.setup(context, masterVolume);
   bpm.min = 50;
@@ -222,7 +219,6 @@ function soundsLoaded() {
     pattern.draw();
   });
 
-
   //data coming through but squares are not being activated on matrix
   //vasilli suggest making a function that packs everything together then sends the state to avoid latency issues
   //he also suggests sending the state of the matrix first then sending the grouped function to play
@@ -239,12 +235,11 @@ function soundsLoaded() {
     {
       pattern.sequence(bpmTempo);
     } else {
-      pattern.stop();    
+      pattern.stop();
     }
   })
 
 }
-
 
 function loadNextSound() {
   var soundName = soundNames.shift();

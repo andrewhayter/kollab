@@ -13,11 +13,9 @@
                 node[prop] = this.value;
             } else {
                 node[prop].value = this.value;
-
             };
             this.blur();
         })
-        
     };
 
     // wireUpOnChange('#gain-slider', gainNode, 'gain');
@@ -52,7 +50,7 @@
             sound: keySound
         };
     };
-    
+
 
     function Sound(frequency, type) {
         this.osc = context.createOscillator();
@@ -61,13 +59,10 @@
         this.osc.connect(this.gain);
         this.gain.connect(biquadFilter);
         this.pressed = false;
-
         if(typeof frequency !== 'undefined') {
             this.osc.frequency.value = frequency;
         }
-
         this.osc.type = type || 'sine';
-
         this.osc.start(0);
     };
 
@@ -78,7 +73,6 @@
             this.pressed = true;
             // console.log("attack value " + $('#attack').val());
             this.gain.gain.linearRampToValueAtTime(1, now + Number($('#attack').val()));
-
         }
     };
 
@@ -86,7 +80,6 @@
         this.pressed = false;
         // console.log("attack value " + $('#attack').val());
         this.gain.gain.linearRampToValueAtTime(0, now + Number($('#attack').val()));
-
     };
 
     function keyboard(notes, containerId) {
@@ -102,7 +95,6 @@
         sortedKeys = sortedKeys.sort(function(note1, note2) {
             if (note1.frequency < note2.frequency) return -1;
             if (note1.frequency > note2.frequency) return 1;
-
             return 0;
         });
 
