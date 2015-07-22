@@ -72,7 +72,7 @@ body {
 
 .submit-button {
   width: 35px;
-  background: #53B2A9;
+  background: #00DDCC;
   border-radius: 5px;
 }
 
@@ -167,6 +167,10 @@ select {
   /*background-color: red;*/
 }
 
+#onOff {
+  box-shadow: -3px 5px 5px #888888;
+}
+
 .labels {
   font-size: .7em;
 }
@@ -189,6 +193,8 @@ select {
 
 .navbar {
   background: #9efff6;
+  box-shadow: -3px 5px 5px #888888;
+  border-style: none;
 }
 
 .navbar-brand {

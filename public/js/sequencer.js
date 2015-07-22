@@ -210,6 +210,7 @@ function soundsLoaded() {
   pattern.on('*', function(data){
     socket.emit('seq play', data);
     console.log("array" + data);
+    console.log(data.list);
   });
 
 

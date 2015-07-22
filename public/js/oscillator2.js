@@ -15,8 +15,11 @@
                 node[prop] = this.value;
             } else {
                 node[prop].value = this.value;
+
             };
+            this.blur();
         })
+        
     };
 
     wireUpOnChange('#gain-slider', gainNode, 'gain');
@@ -132,7 +135,9 @@
             for(var keyCode in notes) {
                 notes[keyCode].key.sound.osc.type = this.value;
             }
+            this.blur();
         };
+
         waveFormSelector.addEventListener('change', setWaveform);
 
         window.addEventListener('keydown' , function(event){

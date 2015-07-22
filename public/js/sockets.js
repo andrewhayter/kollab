@@ -17,11 +17,10 @@ socket.on('chat message', function(data){
 });
 
 
-var el = document.getElementById('messages');
-
-$('.submit-button').click(function(){
-  $('#messages').scrollTop( el.scrollHeight );
-});
+  var el = document.getElementById('messages');
+  $('.submit-button').click(function(){
+    $('#messages').scrollTop( el.scrollHeight );
+  });
 
 $('.login-input').focus();
 
@@ -32,8 +31,8 @@ $('.login-form').submit(function(username){
 });
 
 socket.on('user joined', function (data) {
-  var boldName = $(data.username).css("font-weight", "bold");
-  $('#messages').append($('<li>').text(boldName + " has joined").css("background","none").css("font-style", "italic"));
+  
+  $('#messages').append($('<li>').text(data.username + " has joined").css("background","none").css("font-style", "italic"));
 
 });
 
