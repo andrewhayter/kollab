@@ -18,9 +18,15 @@ socket.on('chat message', function(data){
 
 
 var el = document.getElementById('messages');
+
 $('.submit-button').click(function(){
+  socket.emit('scrooll');
+});
+
+socket.on('scrooll', function(){
   $('#messages').scrollTop( el.scrollHeight );
 });
+
 
 $('.login-input').focus();
 

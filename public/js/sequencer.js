@@ -7,7 +7,7 @@ var snareGain = context.createGain();
 var hihatGain = context.createGain();
 
 // var lfo = context.createOscillator();
-// lfo.frequency.value = 1;
+// lfo.frequency.value = $('#frequency-slider').val();
 // lfo.connect(masterVolume.gain);
 // lfo.start();
 
@@ -183,8 +183,7 @@ function soundsLoaded() {
   });
 
 
-  function play(buffer, kind)
-  {
+  function play(buffer, kind) {
     var source = context.createBufferSource();
     source.buffer = buffer;
     source.playbackRate.value = 0.5 + window[kind + "Pitch"].val.value;
@@ -193,17 +192,12 @@ function soundsLoaded() {
   }
 
 
-  pattern.on('*', function(data)
-  {
-    if(!data.list)
-    {
+  pattern.on('*', function(data) {
+    if(!data.list) {
       socket.emit('pattern', data);
-    }
-    else
-    {
+    } else {
       //Play
-      data.list.map(function(state, idx)
-      {
+      data.list.map(function(state, idx) {
         if(!state) { return; }
         var soundNames = Object.keys(sounds);
         var sound = sounds[soundNames[idx]];
@@ -212,8 +206,7 @@ function soundsLoaded() {
     }
   });
 
-  socket.on('pattern', function(p)
-  {
+  socket.on('pattern', function(p) {
     // pattern.setCell(p.col, p.row, !!p.level); // This calls transmit, causing an infinite loop
     pattern.matrix[p.col][p.row] = p.level;
     pattern.draw();
@@ -227,19 +220,17 @@ function soundsLoaded() {
     socket.emit('seq run', data);
   });
 
-  socket.on('seq run', function(data)
-  {
+  socket.on('seq run', function(data) {
     onOff.val.value = data.value;
     onOff.draw();
-    if (data.value == 1)
-    {
+    if (data.value == 1) {
       pattern.sequence(bpmTempo);
     } else {
       pattern.stop();
     }
   })
-
 }
+
 
 function loadNextSound() {
   var soundName = soundNames.shift();
@@ -249,6 +240,7 @@ function loadNextSound() {
     soundsLoaded();
   }
 }
+
 
 nx.onload = function() {
   loadNextSound();

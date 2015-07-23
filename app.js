@@ -97,6 +97,11 @@ io.on('connection', function(socket){
     console.log("box server " + event);
   })
 
+  socket.on('scrooll', function(event){
+    io.emit('scrooll', event);
+    console.log("box server " + event);
+  })
+
   socket.on('add user', function(username){
    socket.username = username;
     users[username] = username;

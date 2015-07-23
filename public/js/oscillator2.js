@@ -7,6 +7,10 @@
     // gainNode.connect(biquadFilter);
     biquadFilter.connect(masterVolume);
 
+    var lfo = context.createOscillator();
+    lfo.connect(masterVolume.gain);
+    lfo.start();
+
     function wireUpOnChange(id, node, prop, noValue) {
         $(id).on('change', function() {
             if(noValue) {
@@ -18,7 +22,9 @@
         })
     };
 
-    // wireUpOnChange('#gain-slider', gainNode, 'gain');
+
+
+    wireUpOnChange('#frequency-slider', lfo , 'frequency');
     wireUpOnChange('#bqType', biquadFilter, 'type', true);
     wireUpOnChange('#bq-frequency-slider', biquadFilter, 'frequency');
     wireUpOnChange('#bq-gain-slider', biquadFilter, 'gain');

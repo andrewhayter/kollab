@@ -113,6 +113,7 @@ body {
   padding-right: 0;
   height: 650px;
   overflow: auto; 
+  overflow-y:scroll;
   width: 100%;
   padding-left: 0px;
 }
