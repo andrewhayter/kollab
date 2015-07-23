@@ -37,6 +37,66 @@ io.on('connection', function(socket){
     console.log("hello");
   });
 
+  socket.on('seq run', function(data){
+    io.emit('seq run', data);
+  })
+
+  socket.on('seq play', function(data){
+    io.emit('seq play', data);
+    console.log(data);
+    console.log(data.list);
+  })
+
+  socket.on('bpm value', function(tempo){
+    io.emit('bpm value', tempo);
+    console.log("tempo server" +tempo);
+  })
+
+  socket.on('hihat gain', function(gain){
+    io.emit('hihat gain', gain);
+    console.log("gain server " +gain);
+  })
+
+  socket.on('snare gain', function(gain){
+    io.emit('snare gain', gain);
+    console.log("snare gain server " +gain);
+  })
+
+  socket.on('kick gain', function(gain){
+    io.emit('kick gain', gain);
+    console.log("kick gain server " +gain);
+  })
+
+  socket.on('hihat pitch', function(pitch){
+    io.emit('hihat pitch', pitch);
+    console.log("hihat pitch server " +pitch);
+  })
+
+  socket.on('snare pitch', function(pitch){
+    io.emit('snare pitch', pitch);
+    console.log("snare pitch server " +pitch);
+  })
+
+  socket.on('kick pitch', function(pitch){
+    io.emit('kick pitch', pitch);
+    console.log("kick pitch server " +pitch);
+  })
+
+  socket.on('master gain', function(gain){
+    io.emit('master gain', gain);
+    console.log("master gain server " + gain);
+  })
+
+  socket.on('pattern', function(p) {
+    io.emit('pattern', p);
+    console.log("Pattern change", p);
+  })
+
+  socket.on('box', function(event){
+    io.emit('box', event);
+    console.log("box server " + event);
+  })
+
   socket.on('add user', function(username){
    socket.username = username;
     users[username] = username;

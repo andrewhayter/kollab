@@ -7,8 +7,11 @@
 
 body {
   font: 17px Helvetica, Arial;
-  background-color: #f7fffe;
+  background-color: white;
+  /*background-image: url('/public/images/kolab_back.jpg');*/
 }
+
+
 
 .user-name {
     position:fixed;
@@ -61,15 +64,16 @@ body {
   background: #EEEEEE;
   padding: 3px;
   position: relative;
-  border-radius: 20px;
+  border-radius: 5px;
   bottom: 0;
   width: 100%;
+  box-shadow: -3px 5px 5px #888888;
 }
 
 .submit-button {
   width: 35px;
-  background: #53B2A9;
-  border-radius: 50%;
+  background: #00DDCC;
+  border-radius: 5px;
 }
 
 #m {
@@ -78,29 +82,39 @@ body {
   width: 80%;
   display: inline;
   margin-right: 5px;
-  border-radius: 20px;
+  border-radius: 5px;
   /*margin-right: .5%;*/
   /*position: relative;*/
+}
+
+.col-md-1 {
+  padding: 2px;
 }
 
 #effects {
   height:100px;
   background-color: #00DDCC;
   margin-bottom: 20px;
+  box-shadow: -3px 5px 5px #888888;
 }
 
 .message-board {
-  position: fixed;
+  position: absolute;
+  height: 1000px;
   z-index: 999;
 }
 
 #messages {
   list-style-type: none;
+  background-color: #d6ecea;
+  box-shadow: -3px 5px 5px #888888;
+  border-radius: 5px;
   margin: 0;
-  padding: 0;
-  height: 525px;
+  padding-right: 0;
+  height: 650px;
   overflow: auto; 
-  width: 90%;
+  width: 100%;
+  padding-left: 0px;
 }
 
 #messages li {
@@ -130,28 +144,18 @@ body {
   float:left;
 }
 
-#gain-slider {
-  width:20%;
+
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 175px;
+    padding: 0 5px;
+    
 }
 
-#bq-frequency-slider {
-  width:20%;
-}
-
-#bq-gain-slider {
-  width:20%;
-}
-
-#bq-detune-slider {
-  width:20%;
-}
-
-#attack {
-  width: 20%;
-}
-
-/* keyboard */
-
+  
 select {
   font-size: 1em;
   background-color: white;
@@ -162,11 +166,12 @@ select {
   /*background-color: red;*/
 }
 
-.labels {
-  font-size: .7em;
+#onOff {
+  box-shadow: -3px 5px 5px #888888;
 }
 
-.navbar {
+.labels {
+  font-size: .7em;
 }
 
 .seq-type {
@@ -181,25 +186,51 @@ select {
 .labels {
   font-size: .7em;
   text-align: center;
-  margin-left: 10px;
+  /*margin-left: 10px;*/
 }
 
 
 .navbar {
+  background: #9efff6;
+  box-shadow: -3px 5px 5px #888888;
+  border-style: none;
+}
+
+.navbar-brand {
+  font-family: 'Rambla', sans-serif;
+  font-size: 1.5em;
 }
 
 #keyboard {
-  margin-left:20%;
+  /*margin-left:20%;*/
 }
 
 .key {
   border-radius: 2px;
-  margin: 0 0.5%;
-  width: 2.5%;
+  margin: 4px;
+  width: 7.5%;
   padding: 3.5em 0;
   text-align: center;
   text-transform: uppercase;
+  box-shadow: -3px 5px 5px #888888;
   /*transition: margin 150ms ease-in-out;*/
+}
+
+.box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8 {
+  width:40px;
+  height: 40px;
+  margin:5px;
+  background-color: #EEEEEE;
+  border-radius: 2px;
+  transition-duration:.5s;
+}
+
+
+.pad-down {
+  background-color: #00DDCC;
+  transform: scale(1.1,1.1);
+  box-shadow: -3px 5px 5px #888888;
+  /*transition-duration:.5s;*/
 }
 
 .key:nth-child(even){

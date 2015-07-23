@@ -11,14 +11,13 @@ $('.chat-form').submit(function(msg){
 
 socket.on('chat message', function(data){
   if (data.message != '') {
-    $('#messages').append($('<li>').text(data.username + ": " + data.message).css("border-radius","10px"));
+    $('#messages').append($('<li>').text(data.username + ": " + data.message).css("border-radius","5px"));
     console.log(data.message);
   };
 });
 
 
 var el = document.getElementById('messages');
-
 $('.submit-button').click(function(){
   $('#messages').scrollTop( el.scrollHeight );
 });
@@ -32,6 +31,7 @@ $('.login-form').submit(function(username){
 });
 
 socket.on('user joined', function (data) {
+  
   $('#messages').append($('<li>').text(data.username + " has joined").css("background","none").css("font-style", "italic"));
 
 });
