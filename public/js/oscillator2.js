@@ -1,17 +1,30 @@
 (function() {
-    // var gainNode = context.createGain();
+    var gainNode = context.createGain();
     var biquadFilter = context.createBiquadFilter();
-
-    var now = context.currentTime;
-
-    // gainNode.connect(biquadFilter);
+    gainNode.connect(biquadFilter);
     biquadFilter.connect(masterVolume);
 
     var lfo = context.createOscillator();
-    lfo.connect(masterVolume.gain);
+    lfo.frequency.value = 0;
+
+    $('#frequency-slider').on('mousemove', function()
+    {
+        lfo.frequency.value = this.value;
+    });
+
+
+    lfo.connect(gainNode.gain);
     lfo.start();
 
-    function wireUpOnChange(id, node, prop, noValue) {
+    function getAttack()
+    {
+        var attack = $('#attack');
+        return Number(attack.val());
+    }
+
+
+    function wireUpOnChange(id, node, prop, noValue)
+    {
         $(id).on('change', function() {
             if(noValue) {
                 node[prop] = this.value;
@@ -23,8 +36,6 @@
     };
 
 
-
-    wireUpOnChange('#frequency-slider', lfo , 'frequency');
     wireUpOnChange('#bqType', biquadFilter, 'type', true);
     wireUpOnChange('#bq-frequency-slider', biquadFilter, 'frequency');
     wireUpOnChange('#bq-gain-slider', biquadFilter, 'gain');
@@ -63,29 +74,36 @@
         this.gain = context.createGain();
         this.gain.gain.value = 0;
         this.osc.connect(this.gain);
-        this.gain.connect(biquadFilter);
+        this.gain.connect(gainNode);
         this.pressed = false;
         if(typeof frequency !== 'undefined') {
             this.osc.frequency.value = frequency;
         }
-        this.osc.type = type || 'sine';
+        this.osc.type = type || 'triangle';
         this.osc.start(0);
     };
 
 
-    Sound.prototype.play = function() {
-        console.log(this);
-        if(!this.pressed) {
+    Sound.prototype.play = function()
+    {
+        if(!this.pressed)
+        {
             this.pressed = true;
-            // console.log("attack value " + $('#attack').val());
-            this.gain.gain.linearRampToValueAtTime(1, now + Number($('#attack').val()));
+            this.gain.gain.cancelScheduledValues(context.currentTime);
+            this.gain.gain.setValueAtTime(this.gain.gain.value, context.currentTime);
+            this.gain.gain.linearRampToValueAtTime(1, context.currentTime + getAttack());
         }
     };
 
-    Sound.prototype.stop = function() {
-        this.pressed = false;
-        // console.log("attack value " + $('#attack').val());
-        this.gain.gain.linearRampToValueAtTime(0, now + Number($('#attack').val()));
+    Sound.prototype.stop = function()
+    {
+        if(this.pressed)
+        {
+            this.pressed = false;
+            this.gain.gain.cancelScheduledValues(context.currentTime);
+            this.gain.gain.setValueAtTime(this.gain.gain.value, context.currentTime);
+            this.gain.gain.linearRampToValueAtTime(0, context.currentTime + 0.1);
+        }
     };
 
     function keyboard(notes, containerId) {
@@ -122,13 +140,14 @@
 
             if(typeof keyboardNotes[keyCode] !== 'undefined') {
                 keyboardNotes[keyCode].key.sound.stop();
-
                 keyboardNotes[keyCode].key.html.className = 'key col-md-1';
             }
         };
 
-        var setWaveform = function(event) {
-            for(var keyCode in notes) {
+        var setWaveform = function(event)
+        {
+            for(var keyCode in notes)
+            {
                 notes[keyCode].key.sound.osc.type = this.value;
             }
             this.blur();
@@ -136,32 +155,20 @@
 
         waveFormSelector.addEventListener('change', setWaveform);
 
-        window.addEventListener('keydown' , function(event){
+        window.addEventListener('keydown' , function(event)
+        {
             if (!$('#m').is(':focus')) {
                 socket.emit('play note', event.keyCode);
             };
         });
 
-        socket.on('play note', function(event){
-            console.log("should play note");
-            console.log("play note " + event);
-            console.log(event);
-            playNote(event);
-        });
-
-        window.addEventListener('keyup', function(event){
+        window.addEventListener('keyup', function(event)
+        {
             socket.emit('end note', event.keyCode);
-            console.log(event.keyCode);
-            console.log("keydown " + event.keyCode);
         });
 
-        socket.on('end note', function(event){
-            // console.log("should end note");
-            // console.log("end note " + event);
-            // console.log(endNote(event));
-            // console.log(event);
-            endNote(event);
-        });
+        socket.on('play note', playNote);
+        socket.on('end note', endNote);
     };
 
     window.addEventListener('load', function() {

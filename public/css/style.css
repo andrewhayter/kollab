@@ -7,8 +7,8 @@
 
 body {
   font: 17px Helvetica, Arial;
-  background-color: white;
-  /*background-image: url('/public/images/kolab_back.jpg');*/
+  /*background-color: white;*/
+  background-image: url('/public/images/symphony.png');
 }
 
 
@@ -32,6 +32,11 @@ body {
     background: radial-gradient(ellipse at center,  #00ddcc 24%,#59a8e5 83%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ddcc', endColorstr='#59a8e5',GradientType=1 );   
     
+}
+
+.logo {
+  font-family: 'Ultra', serif;;
+
 }
 
 
@@ -111,7 +116,7 @@ body {
   border-radius: 5px;
   margin: 0;
   padding-right: 0;
-  height: 650px;
+  height: 550px;
   overflow: auto; 
   overflow-y:scroll;
   width: 100%;
@@ -122,6 +127,15 @@ body {
   position: inherit;
   padding: 5px 10px;
   width: 100%;
+}
+
+.sliders {
+  padding-top:20px;
+  padding-bottom:30px; 
+}
+
+.sliderShort {
+  width:50px;
 }
 
 #messages li:nth-child(odd) {
@@ -150,7 +164,7 @@ input[type=range][orient=vertical]
 {
     writing-mode: bt-lr; /* IE */
     -webkit-appearance: slider-vertical; /* WebKit */
-    width: 8px;
+    /*width: 8px;*/
     height: 175px;
     padding: 0 5px;
     
@@ -192,8 +206,7 @@ select {
 
 
 .navbar {
-  background: #9efff6;
-  box-shadow: -3px 5px 5px #888888;
+  background: #0BD6CF;
   border-style: none;
 }
 
