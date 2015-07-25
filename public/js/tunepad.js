@@ -1,3 +1,6 @@
+
+//beware very wet code below!
+
 (function(){
   var getSound = new XMLHttpRequest();
   getSound.open("GET", "samples/dilla/pada_kick.wav", true);
