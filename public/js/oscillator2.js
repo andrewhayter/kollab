@@ -7,8 +7,7 @@
     var lfo = context.createOscillator();
     lfo.frequency.value = 0;
 
-    $('#frequency-slider').on('mousemove', function()
-    {
+    $('#frequency-slider').on('mousemove', function() {
         lfo.frequency.value = this.value;
     });
 
@@ -16,15 +15,13 @@
     lfo.connect(gainNode.gain);
     lfo.start();
 
-    function getAttack()
-    {
+    function getAttack() {
         var attack = $('#attack');
         return Number(attack.val());
     }
 
 
-    function wireUpOnChange(id, node, prop, noValue)
-    {
+    function wireUpOnChange(id, node, prop, noValue) {
         $(id).on('change', function() {
             if(noValue) {
                 node[prop] = this.value;
@@ -84,10 +81,8 @@
     };
 
 
-    Sound.prototype.play = function()
-    {
-        if(!this.pressed)
-        {
+    Sound.prototype.play = function() {
+        if(!this.pressed) {
             this.pressed = true;
             this.gain.gain.cancelScheduledValues(context.currentTime);
             this.gain.gain.setValueAtTime(this.gain.gain.value, context.currentTime);
@@ -95,10 +90,8 @@
         }
     };
 
-    Sound.prototype.stop = function()
-    {
-        if(this.pressed)
-        {
+    Sound.prototype.stop = function() {
+        if(this.pressed) {
             this.pressed = false;
             this.gain.gain.cancelScheduledValues(context.currentTime);
             this.gain.gain.setValueAtTime(this.gain.gain.value, context.currentTime);
@@ -144,10 +137,8 @@
             }
         };
 
-        var setWaveform = function(event)
-        {
-            for(var keyCode in notes)
-            {
+        var setWaveform = function(event) {
+            for(var keyCode in notes) {
                 notes[keyCode].key.sound.osc.type = this.value;
             }
             this.blur();
@@ -155,15 +146,13 @@
 
         waveFormSelector.addEventListener('change', setWaveform);
 
-        window.addEventListener('keydown' , function(event)
-        {
+        window.addEventListener('keydown' , function(event) {
             if (!$('#m').is(':focus')) {
                 socket.emit('play note', event.keyCode);
             };
         });
 
-        window.addEventListener('keyup', function(event)
-        {
+        window.addEventListener('keyup', function(event) {
             socket.emit('end note', event.keyCode);
         });
 
